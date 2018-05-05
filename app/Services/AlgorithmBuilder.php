@@ -11,6 +11,8 @@ namespace App\Services;
 class AlgorithmBuilder extends AbstractAlgorithmBuilder
 {
     private $algorithm;
+    private $tracks = array();
+    private $villages = array();
 
     public function __construct()
     {
@@ -19,16 +21,18 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
 
     public function addTrack(Track $track)
     {
-        $this->algorithm->addTrack($track);
+        array_push($this->tracks,$track);
     }
 
     public function addVillage(VillageSchematics $village)
     {
-        $this->algorithm->addVillage($village);
+        array_push($this->villages,$village);
     }
 
     public function getAlgorithm(): Algorithm
     {
+        $this->algorithm->addTracks($this->tracks);
+        $this->algorithm->addVillages($this->villages);
         return $this->algorithm;
     }
 }
