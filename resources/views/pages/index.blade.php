@@ -95,7 +95,7 @@
                                     <h1>subscribe</h1>
                                 </div>
                                 <div class="form">
-                                    <form onclick="myFunction()" action="" method="GET" id="form2">
+                                    <div id="form">
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label>Locations:</label>
@@ -122,53 +122,83 @@
                                         </div>
                                         <div class="row">
                                             </br>
-                                            <input type="submit" value="Subscribe" onclick="myFunction2()"/>
+                                            <input type="button" value="Subscribe" onclick="myFunction2()"/>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="pop-up2" hidden>
+                    <div class="content">
+                        <div class="container">
+                            <div class="dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
 
+                            <span class="close">close</span>
 
-                    {{--Popup No2--}}
-
+                            <div class="title">
+                                <h1>subscribe</h1>
+                            </div>
+                            <div class="form2">
+                                <div id="form2">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Locations:</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label id="demo">--</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Buckets:</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" name="buckets" id="buckets">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Limitsof the road:</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" name="limits" id="limits">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        </br>
+                                        <input type="button" value="Subscribe"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <label id="field2">Buckets:</label>
-            <script>
-                $("button").click(function () {
-                    $(".pop-up").addClass("open");
-                });
-
-                $(".pop-up .close").click(function () {
-                    $(".pop-up").removeClass("open");
-                });
-            </script>
-            <script>
-                function myFunction2() {
-                    document.getElementById("field2").value = document.getElementById("buckets").value;
-                }
-            </script>
-
-            {{--<script>--}}
-                {{--function myFunction2() {--}}
-                    {{--document.getElementById("hi").innerHTML = "YOU CLICKED ME!";--}}
-                    {{--// var x = document.getElementById("buckets").value;--}}
-                    {{--var y = document.getElementById("limits").value;--}}
-                {{--}--}}
-
-                {{--$("io").click(function () {--}}
-                    {{--$(".pop-up2").addClass("open");--}}
-                {{--});--}}
-
-                {{--$(".pop-up2 .close").click(function () {--}}
-                    {{--$(".pop-up2").removeClass("open");--}}
-                {{--});--}}
-            {{--</script>--}}
         </div>
     </div>
 
+    <script>
+        $("button").click(function () {
+            $(".pop-up").addClass("open");
+        });
+
+        $(".pop-up .close").click(function () {
+            $(".pop-up").removeClass("open");
+        });
+
+        function myFunction2() {
+            $(".button").addClass('hidden');
+            $(".pop-up").addClass("hidden");
+            $(".pop-up2").removeAttr('hidden');
+        }
+    </script>
 @endsection
 
 <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
