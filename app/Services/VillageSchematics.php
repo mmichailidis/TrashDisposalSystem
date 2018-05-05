@@ -10,12 +10,12 @@
 namespace App\Services;
 
 use App\Village;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class VillageSchematics
 {
     private $name;
+    private $id;
     private $lon;
     private $lat;
     private $bin;
@@ -46,7 +46,7 @@ class VillageSchematics
         $vS->onlyOnce = $json['OTO'];
 
         $village = Village::where(["name" => $vS->name])->first();
-
+        $vS->id = $village->id;
         $vS->lat = $village->latitude;
         $vS->lon = $village->longitude;
         $vS->type = TownType::getType($village->type);
@@ -54,20 +54,15 @@ class VillageSchematics
         return $vS;
     }
 
-    function setRoutes(array $villages)
+    function setRoutes()
     {
-        $con = DB::select(DB::raw('SELECT vill.name as destination, vill.latitude as lat, vill.longitude as lon FROM TrashDisposalSystem.connections as conn
+        $con = DB::select(DB::raw('SELECT vill.name as destination FROM TrashDisposalSystem.connections as conn
             INNER JOIN TrashDisposalSystem.villages as vill ON vill.id = conn.connected_village
-            where conn.route_village = 1;
-            '));
+            where conn.route_village = ' . $this->id
+        ));
 
         foreach ($con as $destinationObj) {
-            foreach ($villages as $village) {
-
-                if ($destinationObj->destination === $village->getName()) {
-                    array_push($this->availableRoutes, AvailableRoute::generate($this, $village));
-                }
-            }
+            array_push($this->availableRoutes, $destinationObj->destination);
         }
     }
 
@@ -140,39 +135,47 @@ class VillageSchematics
         $this->isVisited = true;
     }
 
-    public function getShortestPath(Collection $visitedCollection): AvailableRoute
+    public function demandSolution()
     {
-//        $d = collect($this->availableRoutes)->filter(function (string $route) use ($visitedCollection) {
-//            return !$visitedCollection->contains(function (VillageSchematics $village) use ($route) {
-//                return $village->getName() === $route;
-//            });//check if collection is empty
-//        })->min(function (string $item) {
-//            $calculator = new DistanceCalculator();
-//            $info = explode(":", $item);
-//            $val = $calculator->calculateDistance($this->getLat(), $this->getLon(), $info[1], $info[2]);
-//            return $val['meters_distance'];
-//        });
+        echo $this->getName();
+    }
+
+
+//    public function getShortestPath(): AvailableRoute
+//    {
+//        $available = array();
 //
-        $available = array();
-        foreach ($this->availableRoutes as $route) {
-            if (!$visitedCollection->contains(function (VillageSchematics $village) use ($route) {
-                dd($route);
-                return $village->getName() === $route;
-            })) {
-                array_push($available, $route);
-            };
-        }
-
-        return $available[0];
-//        dd($d);
-    }
-
-    public function getUnvisitedPaths(Collection $visitedCollection): array
-    {
-        return collect($this->availableRoutes)->filter(function (AvailableRoute $route) use ($visitedCollection) {
-            return !$visitedCollection->contains(function (VillageSchematics $village) use ($visitedCollection, $route) {
-                return $village->getName() === $route->getTarget();
-            });
-        });
-    }
+//        dd('Shortest path needs implementation');
+//
+////        foreach ($this->availableRoutes as $route) {
+////            if (!$visitedCollection->contains(function (VillageSchematics $village) use ($route) {
+////                return $village->getName() === $route;
+////            })) {
+////                array_push($available, $route);
+////            };
+////        }
+//
+//        if ($available == null) {
+//            dd('null available', $available, $visitedCollection, $this->availableRoutes);
+//        }
+//
+//        $min = $available[0];
+//
+//        foreach ($available as $route) {
+//            if ($min->getDistance() > $route->getDistance()) {
+//                $min = $route;
+//            }
+//        }
+//
+//        return $min;
+//    }
+//
+//    public function getUnvisitedPaths(Collection $visitedCollection): array
+//    {
+//        return collect($this->availableRoutes)->filter(function (AvailableRoute $route) use ($visitedCollection) {
+//            return !$visitedCollection->contains(function (VillageSchematics $village) use ($visitedCollection, $route) {
+//                return $village->getName() === $route->getTarget();
+//            });
+//        });
+//    }
 }

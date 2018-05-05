@@ -9,6 +9,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Log;
+
 class Algorithm
 {
     private $villages = array();
@@ -37,42 +39,48 @@ class Algorithm
             }
         }
 
-        $previousNode = null;
-        $currentNode = $start;
-        $flag = true;
+        $value = $start->demandSolution();
 
-        while ($flag) {
-            $route = $currentNode->getShortestPath(collect($this->villages)->filter(function($village) {
-                return $village->isVisited();
-            }));
-
-            if ($route === null) {
-                $currentNode = $previousNode;
-                continue;
-            }
-
-            $currentNode->setVisitedTrue();
-            $villageName = $route->getTarget();
-            $newNode = $villageName;
-
-            if ($newNode == null) {
-                throw new \InvalidArgumentException();
-            }
-
-            $flag = $this->keepGoing();
-            $previousNode = $currentNode;
-            $currentNode = $newNode;
-            //doesnt end at the end.. needs to locate the end also
-        }
-
-        dd($this->villages);
+        return $value;
+//        $previousNode = null;
+//        $currentNode = $start;
+//        $flag = true;
+//
+//        while ($flag) {
+//            $route = $currentNode->getShortestPath(collect($this->villages)->filter(function ($village) {
+//                return $village->isVisited();
+//            }));
+//
+//            if ($route === null) {
+//                $currentNode = $previousNode;
+//                dd('route was null', $currentNode);
+//                continue;
+//            }
+//
+//            $currentNode->setVisitedTrue();
+//            $villageName = $route->getTarget();
+//            $newNode = $villageName;
+//
+//            if ($newNode === null) {
+//                throw new \InvalidArgumentException();
+//            }
+//
+//            $flag = $this->keepGoing();
+//            $previousNode = $currentNode;
+//            $currentNode = $newNode;
+//            Log::info($currentNode->getName() .'  :  '. $currentNode->isVisited());
+//            //doesnt end at the end.. needs to locate the end also
+//        }
+//
+//        dd("correct dd", $this->villages);
+        dd('a');
         return 'a';
     }
 
     private function keepGoing(): bool
     {
         foreach ($this->villages as $village) {
-            if (!$village->isVisited) {
+            if (!$village->isVisited()) {
                 return true;
             }
         }
