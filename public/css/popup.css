@@ -114,7 +114,7 @@
 }
 .button button:hover {
     cursor: pointer;
-    background-color: #8e6ac1;
+    background-color: #156605;
     color: #ffffff;
 }
 .button button span {
@@ -196,7 +196,7 @@
 }
 .pop-up .content .close:hover {
     cursor: pointer;
-    color: #f66867;
+    color: #438C34;
 }
 .pop-up .content .dots .dot {
     position: absolute;
@@ -208,7 +208,7 @@
     right: -80px;
     width: 160px;
     height: 160px;
-    background-color: #689bf6;
+    background-color: #166905;
     -webkit-animation: float 6s ease-in-out infinite;
     -moz-animation: float 6s ease-in-out infinite;
     -o-animation: float 6s ease-in-out infinite;
@@ -227,7 +227,7 @@
     left: -120px;
     width: 240px;
     height: 240px;
-    background-color: #f66867;
+    background-color: #438C34;
     -webkit-animation: float 8s ease-in-out infinite;
     -moz-animation: float 8s ease-in-out infinite;
     -o-animation: float 8s ease-in-out infinite;
@@ -238,7 +238,7 @@
     right: -50px;
     width: 100px;
     height: 100px;
-    background-color: #ffd84c;
+    background-color: #225418;
     -webkit-animation: float 4s ease-in-out infinite;
     -moz-animation: float 4s ease-in-out infinite;
     -o-animation: float 4s ease-in-out infinite;
@@ -246,7 +246,7 @@
 }
 .pop-up .content .title h1 {
     text-align: center;
-    color: #f66867;
+    color: #438C34;
     text-transform: uppercase;
     font-weight: 900;
     font-size: 2.8rem;
@@ -282,7 +282,7 @@
     margin-bottom: 30px;
 }
 .pop-up .content .subscribe h1 span {
-    color: #f66867;
+    color: #438C34;
 }
 .pop-up .content .subscribe form {
     overflow: hidden;
@@ -316,9 +316,9 @@
     border-color: #3e4146;
 }
 .pop-up .content .subscribe form input[type=submit] {
-    background-color: #8e6ac1;
+    background-color: #166905;
     color: #ffffff;
-    border: 1px solid #8e6ac1;
+    border: 1px solid #166905;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -331,8 +331,8 @@
 }
 .pop-up .content .subscribe form input[type=submit]:hover {
     cursor: pointer;
-    background-color: #7349af;
-    border-color: #7349af;
+    background-color: #166905;
+    border-color: #416b1f;
 }
 .pop-up.open {
     visibility: visible;
@@ -343,7 +343,7 @@
     -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
 }
-.pop-up.open img {
+.pop-up.open .form {
     opacity: 1;
     -webkit-transition: 1s;
     -moz-transition: 1s;
