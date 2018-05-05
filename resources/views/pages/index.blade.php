@@ -44,14 +44,22 @@
                         }
 
                         var destination = [];
-                        @foreach($village as $v)
-                         destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
-                        @endforeach
+                        @foreach($villageConn as $con)
+                                {{--@foreach($village as $v)--}}
+                                    {{--@if(($con->route_village)==($v->id))--}}
+                                    {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
+                                    {{--@endif--}}
+                                    {{--@if(($con->connected_village)==($v->id))--}}
+                                    {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
+                                {{--@endif--}}
+                                {{--@endforeach--}}
+                                destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
+                         @endforeach
 
-                        for(var a=0, n = destination.length; a<n; a++) {
+                        for (var a = 0, n = destination.length; a < n; a++) {
                             var coordinates = new Array();
-                            for (var j = a; j < a+2 && j < n; j++) {
-                                coordinates[j-a] = destination[j];
+                            for (var j = a; j < a + 2 && j < n; j++) {
+                                coordinates[j - a] = destination[j];
                             }
 
                             var lineSymbol = [{
@@ -59,8 +67,7 @@
                                 offset: '100%',
                             }];
                             var polylineOptions = {path: coordinates, icons: lineSymbol};
-                            var polyline = new google.maps.Polyline( polylineOptions);
-
+                            var polyline = new google.maps.Polyline(polylineOptions);
 
 
                             polyline.setMap(map);
