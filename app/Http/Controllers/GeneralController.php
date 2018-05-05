@@ -139,7 +139,7 @@ class GeneralController extends Controller
             $algorithmExecutor->addVillage($vil);
         });
 
-        $algorithmExecutor->execute('no data');
+        return $algorithmExecutor->execute('no data');
     }
 
 }
