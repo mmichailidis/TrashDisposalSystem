@@ -6,6 +6,7 @@
  * Date: 05-May-18
  * Time: 12:48 PM
  */
+
 namespace App\Services;
 
 class AlgorithmBuilder extends AbstractAlgorithmBuilder
@@ -21,18 +22,23 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
 
     public function addTrack(Track $track)
     {
-        array_push($this->tracks,$track);
+        array_push($this->tracks, $track);
     }
 
     public function addVillage(VillageSchematics $village)
     {
-        array_push($this->villages,$village);
+        array_push($this->villages, $village);
     }
 
     public function getAlgorithm(): Algorithm
     {
+        foreach ($this->villages as $village) {
+            $village->setRoutes($this->villages);
+        }
+
         $this->algorithm->addTracks($this->tracks);
         $this->algorithm->addVillages($this->villages);
+        dd($this->algorithm);
         return $this->algorithm;
     }
 }

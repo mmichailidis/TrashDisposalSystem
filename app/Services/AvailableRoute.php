@@ -6,6 +6,7 @@
  * Date: 05-May-18
  * Time: 1:45 PM
  */
+
 namespace App\Services;
 
 
@@ -28,10 +29,24 @@ class AvailableRoute
         return new AvailableRoute();
     }
 
+    public static function generate(VillageSchematics $root, VillageSchematics $target): AvailableRoute
+    {
+        $aR = new AvailableRoute();
+        $aR->root = $root;
+        $aR->target = $target;
+
+        $calc = new DistanceCalculator();
+        $results = $calc->calculateDistance($aR->getRoot()->getLat(), $aR->getRoot()->getLon(),
+            $aR->getTarget()->getLat(), $aR->getTarget()->getLon());
+        $aR->distance = $results['meters_distance'];
+        $aR->text = $results['km_distance'];
+        return $aR;
+    }
+
     /**
      * @return mixed
      */
-    public function getRoot(): string
+    public function getRoot(): VillageSchematics
     {
         return $this->root;
     }
@@ -39,7 +54,7 @@ class AvailableRoute
     /**
      * @return mixed
      */
-    public function getTarget(): string
+    public function getTarget(): VillageSchematics
     {
         return $this->target;
     }
