@@ -15,10 +15,16 @@ class Algorithm
 
     function addVillage($village)
     {
+
     }
 
     function addTrack($track)
     {
 
+    }
+
+    function execute($data)
+    {
+        return 'a';
     }
 }
