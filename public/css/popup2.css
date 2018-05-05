@@ -154,7 +154,7 @@
         max-width: 900px;
     }
 }
-.pop-up .content {
+.pop-up2 .content {
     width: 100%;
     max-width: 900px;
     overflow: hidden;
@@ -163,26 +163,26 @@
     min-height: 100vh;
 }
 @media (min-width: 768px) {
-    .pop-up .content {
+    .pop-up2 .content {
         min-height: inherit;
     }
 }
-.pop-up .content .container {
+.pop-up2 .content .container {
     padding: 100px 20px 140px;
 }
 @media (min-width: 568px) {
-    .pop-up .content .container {
+    .pop-up2 .content .container {
         padding: 50px 20px 80px;
     }
 }
 @media (min-width: 768px) {
-    .pop-up .content .container {
+    .pop-up2 .content .container {
         padding: 70px 0px 90px;
         max-width: 520px;
         margin: 0 auto;
     }
 }
-.pop-up .content .close {
+.pop-up2 .content .close {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -194,16 +194,16 @@
     -o-transition: all 0.4s;
     transition: all 0.4s;
 }
-.pop-up .content .close:hover {
+.pop-up2 .content .close:hover {
     cursor: pointer;
     color: #438C34;
 }
-.pop-up .content .dots .dot {
+.pop-up2 .content .dots .dot {
     position: absolute;
     border-radius: 100%;
     z-index: 11;
 }
-.pop-up .content .dots .dot:nth-of-type(1) {
+.pop-up2 .content .dots .dot:nth-of-type(1) {
     top: -80px;
     right: -80px;
     width: 160px;
@@ -215,14 +215,14 @@
     animation: float 6s ease-in-out infinite;
 }
 @media (min-width: 768px) {
-    .pop-up .content .dots .dot:nth-of-type(1) {
+    .pop-up2 .content .dots .dot:nth-of-type(1) {
         top: -220px;
         right: -220px;
         width: 380px;
         height: 380px;
     }
 }
-.pop-up .content .dots .dot:nth-of-type(2) {
+.pop-up2 .content .dots .dot:nth-of-type(2) {
     bottom: -135px;
     left: -135px;
     width: 240px;
@@ -233,7 +233,7 @@
     -o-animation: float 8s ease-in-out infinite;
     animation: float 8s ease-in-out infinite;
 }
-.pop-up .content .dots .dot:nth-of-type(3) {
+.pop-up2 .content .dots .dot:nth-of-type(3) {
     bottom: -40px;
     right: -40px;
     width: 100px;
@@ -244,7 +244,7 @@
     -o-animation: float 4s ease-in-out infinite;
     animation: float 4s ease-in-out infinite;
 }
-.pop-up .content .title h1 {
+.pop-up2 .content .title h1 {
     text-align: center;
     color: #438C34;
     text-transform: uppercase;
@@ -252,7 +252,7 @@
     font-size: 2.8rem;
     letter-spacing: 0.05rem;
 }
-.pop-up .content img {
+.pop-up2 .content img {
     width: 100%;
     max-width: 220px;
     display: inline-block;
@@ -274,20 +274,20 @@
         max-width: 300px;
     }
 }
-.pop-up .content .subscribe h1 {
+.pop-up2 .content .subscribe h1 {
     font-size: 1.5rem;
     color: #3e4146;
     line-height: 130%;
     letter-spacing: 0.07rem;
     margin-bottom: 30px;
 }
-.pop-up .content .subscribe h1 span {
+.pop-up2 .content .subscribe h1 span {
     color: #438C34;
 }
-.pop-up .content .subscribe form {
+.pop-up2 .content .subscribe form {
     overflow: hidden;
 }
-.pop-up .content .subscribe form input {
+.pop-up2 .content .subscribe form input {
     width: 100%;
     float: left;
     padding: 15px 20px;
@@ -297,7 +297,7 @@
     letter-spacing: 0.05rem;
     outline: 0;
 }
-.pop-up .content .subscribe form input[type=email] {
+.pop-up2 .content .subscribe form input[type=email] {
     margin-bottom: 15px;
     border: 1px solid #bec1c5;
     -webkit-transition: all 0.4s;
@@ -306,16 +306,16 @@
     transition: all 0.4s;
 }
 @media (min-width: 768px) {
-    .pop-up .content .subscribe form input[type=email] {
+    .pop-up2 .content .subscribe form input[type=email] {
         margin-bottom: 0px;
         width: 75%;
         border-right-width: 0px;
     }
 }
-.pop-up .content .subscribe form input[type=email]:focus {
+.pop-up2 .content .subscribe form input[type=email]:focus {
     border-color: #3e4146;
 }
-.pop-up .content .subscribe form input[type=submit] {
+.pop-up2 .content .subscribe form input[type=submit] {
     background-color: #166905;
     color: #ffffff;
     border: 1px solid #166905;
@@ -325,16 +325,16 @@
     transition: all 0.4s;
 }
 @media (min-width: 768px) {
-    .pop-up .content .subscribe form input[type=submit] {
+    .pop-up2 .content .subscribe form input[type=submit] {
         width: 25%;
     }
 }
-.pop-up .content .subscribe form input[type=submit]:hover {
+.pop-up2 .content .subscribe form input[type=submit]:hover {
     cursor: pointer;
     background-color: #166905;
     border-color: #416b1f;
 }
-.pop-up.open {
+.pop-up2.open {
     visibility: visible;
     opacity: 1;
     -webkit-transform: translate(-50%, -50%) scale(1);
@@ -343,7 +343,7 @@
     -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
 }
-.pop-up.open .form {
+.pop-up2.open .form {
     opacity: 1;
     -webkit-transition: 1s;
     -moz-transition: 1s;
