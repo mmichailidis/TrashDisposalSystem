@@ -66,8 +66,18 @@
                             <div class="title">
                                 <h1>subscribe</h1>
                             </div>
-
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/256492/cXsiNryL.png" alt="Car">
+                            <div class="form">
+                                <form action="" method="POST" id="form1">
+                                    <label>Locations:</label>
+                                    <input type="text" name="locations">
+                                    <br>
+                                    <label>Buckets:</label>
+                                    <input type="text" name="buckets">
+                                    <br>
+                                    <label>Limitsof the road:</label>
+                                    <input type="text" name="limits">
+                                </form>
+                            </div>
 
                             <div class="subscribe">
                                 <h1>Subscribe to get the latest <span>news &amp; updates</span>.</h1>
