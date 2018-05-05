@@ -14,6 +14,7 @@ class Connections extends Migration
     public function up()
     {
         Schema::create('connections', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('route_village');
             $table->integer('connected_village');
         });
