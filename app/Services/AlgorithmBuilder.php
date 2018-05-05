@@ -33,11 +33,7 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
     public function getAlgorithm(): Algorithm
     {
         foreach ($this->villages as $village) {
-            $allVillages = $this->villages;
-            $vilId = array_search($village, $allVillages);
-            unset($allVillages[$vilId]);
-
-            $village->setRoutes($allVillages);
+            $village->setRoutes();
         }
 
         $this->algorithm->addTracks($this->tracks);
