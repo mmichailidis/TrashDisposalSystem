@@ -15,7 +15,7 @@ class TownType
     private static $MIDDLE_ROUTE = [1, 'middle'];
     private static $ENDING_ROUTE = [2, 'end'];
 
-    public static function getType($val): int
+    public static function getType($val): string
     {
         switch ($val) {
             case self::$START_ROUTE[0]:
