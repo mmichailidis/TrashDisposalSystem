@@ -38,7 +38,7 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
 
         $this->algorithm->addTracks($this->tracks);
         $this->algorithm->addVillages($this->villages);
-        dd($this->algorithm);
+
         return $this->algorithm;
     }
 }

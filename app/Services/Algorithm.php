@@ -51,9 +51,9 @@ class Algorithm
                 continue;
             }
 
-            $currentNode->setVisistedTrue();
+            $currentNode->setVisitedTrue();
             $villageName = $route->getTarget();
-            $newNode = $this->locateVillage($villageName);
+            $newNode = $villageName;
 
             if ($newNode == null) {
                 throw new \InvalidArgumentException();
