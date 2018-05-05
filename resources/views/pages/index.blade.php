@@ -45,11 +45,28 @@
 
                         var destination = [];
                         @foreach($village as $v)
-                        destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
-                                @endforeach
-                        var polylineOptions = {path: destination};
-                        var polyline = new google.maps.Polyline(polylineOptions);
-                        polyline.setMap(map);
+                         destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
+                        @endforeach
+
+                        for(var a=0, n = destination.length; a<n; a++) {
+                            var coordinates = new Array();
+                            for (var j = a; j < a+2 && j < n; j++) {
+                                coordinates[j-a] = destination[j];
+                            }
+
+                            var lineSymbol = [{
+                                icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},
+                                offset: '100%',
+                            }];
+                            var polylineOptions = {path: coordinates, icons: lineSymbol};
+                            var polyline = new google.maps.Polyline( polylineOptions);
+
+
+
+                            polyline.setMap(map);
+//                            polylines.push(polyline);
+                        }
+
                     }
                 </script>
 
