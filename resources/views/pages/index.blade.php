@@ -53,7 +53,8 @@
                                     {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
                                 {{--@endif--}}
                                 {{--@endforeach--}}
-                                destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
+                                destination.push(new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}));
+                                destination.push(new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}}));
                          @endforeach
 
                         for (var a = 0, n = destination.length; a < n; a++) {
