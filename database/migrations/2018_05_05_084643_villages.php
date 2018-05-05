@@ -17,6 +17,8 @@ class Villages extends Migration
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('type')->default(1); //0:start, 1: middle, 2: goal
+            $table->double('latitude');
+            $table->double('longitude');
         });
     }
 
