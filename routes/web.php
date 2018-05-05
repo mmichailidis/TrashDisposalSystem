@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::post('/calculate', 'GeneralController@distanceCalculator');
+
+Route::post('/demo', 'GeneralController@demo');

@@ -26,23 +26,25 @@ class Algorithm
 
     function execute($data)
     {
-        $start = NIL;
-        $end = NIL;
+        $start = null;
+        $end = null;
 
         foreach ($this->villages as $village) {
-            if ($village->getType == "start") {
+            if ($village->getType() == "start") {
                 $start = $village;
-            } else if ($village->getType == "end") {
+            } else if ($village->getType() == "end") {
                 $end = $village;
             }
         }
 
-        $previousNode = nil;
+        $previousNode = null;
         $currentNode = $start;
         $flag = true;
 
         while ($flag) {
-            $route = $currentNode->getShortestPath();
+            $route = $currentNode->getShortestPath(collect($this->villages)->filter(function($village) {
+                return $village->isVisited();
+            }));
 
             if ($route === null) {
                 $currentNode = $previousNode;

@@ -9,7 +9,9 @@
 
 namespace App\Services;
 
-use Illuminate\Database\Eloquent\Collection;
+use App\Village;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class VillageSchematics
 {
@@ -26,12 +28,39 @@ class VillageSchematics
     private function __construct()
     {
         $this->isVisited = false;
+        $this->availableRoutes = array();
     }
 
+    /**
+     * TODO add routes
+     * @param $json
+     * @return VillageSchematics
+     */
     public static function parse($json): VillageSchematics
     {
-        //convert type to string here before return
-        return new VillageSchematics();
+        $vS = new VillageSchematics();
+
+        $vS->name = $json['name'];
+        $vS->bin = $json['bin'];
+        $vS->size = $json['capacity'];
+        $vS->onlyOnce = $json['OTO'];
+
+        $village = Village::where(["name" => $vS->name])->first();
+
+        $vS->lat = $village->latitude;
+        $vS->lon = $village->longitude;
+        $vS->type = TownType::getType($village->type);
+
+        $con = DB::select(DB::raw('SELECT vill.name as destination, vill.latitude as lat, vill.longitude as lon FROM TrashDisposalSystem.connections as conn
+            INNER JOIN TrashDisposalSystem.villages as vill ON vill.id = conn.connected_village
+            where conn.route_village = 1;
+            '));
+
+        foreach ($con as $destinationObj) {
+            array_push($vS->availableRoutes, $destinationObj->destination . ':' . $destinationObj->lat . ':' . $destinationObj->lon);
+        }
+
+        return $vS;
     }
 
     /**
@@ -105,11 +134,12 @@ class VillageSchematics
 
     public function getShortestPath(Collection $visitedCollection): AvailableRoute
     {
-        return collect($this->availableRoutes)->filter(function (AvailableRoute $route) use ($visitedCollection) {
-            return !$visitedCollection->contains(function (VillageSchematics $village) use ($visitedCollection, $route) {
-                return $village->getName() === $route->getTarget();
+        return collect($this->availableRoutes)->filter(function (string $route) use ($visitedCollection) {
+            return !$visitedCollection->contains(function (VillageSchematics $village) use ($route) {
+                return $village->getName() === $route;
             });//check if collection is empty
-        })->min(function (AvailableRoute $item) {
+        })->min(function (string $item) {
+            dd($item);
             return $item->getDistance();
         });
     }
