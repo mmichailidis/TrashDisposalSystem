@@ -48,6 +48,19 @@ class GeneralController extends Controller
 
         }
 
+        foreach ($villageConn as $key => $value) {
+            $route = DB::select(DB::raw(
+                'SELECT latitude, longitude FROM villages WHERE id = '.$value->route_village
+            ));
+
+            $dest = DB::select(DB::raw(
+                'SELECT latitude, longitude FROM villages WHERE id = '.$value->connected_village
+            ));
+
+            $villageConn[$key]['route_coord'] =  $route;
+            $villageConn[$key]['dest_coord'] = $dest;
+        }
+
         return view('pages.index')->withVillage($village)->withVillageConn($villageConn);
     }
 
