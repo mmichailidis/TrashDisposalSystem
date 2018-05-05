@@ -8,13 +8,6 @@
                 <h3>My Google Maps Demo</h3>
                 <div id="googleMap" style="width:100%;height:400px;"></div>
 
-                @foreach($villageConn as $vi)
-                     {{$vi}}
-                @endforeach
-                {{--<script async defer--}}
-                {{--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7MUrUKE60VHv-MolOuwADCelvq8Wk4E&callback=initMap">--}}
-                {{--</script>--}}
-
                 <script>
                     var locations = [
                         @foreach($village as $vi)
@@ -44,9 +37,19 @@
                                 return function () {
                                     infowindow.setContent(locations[i][0]);
                                     infowindow.open(map, marker2);
+                                    document.getElementById("demo").innerHTML = (locations[i][0]);
+
                                 }
                             })(marker2, i));
                         }
+
+                        var destination = [];
+                        @foreach($village as $v)
+                            destination.push (new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
+                        @endforeach
+                        var polylineOptions = {path: destination};
+                        var polyline = new google.maps.Polyline(polylineOptions);
+                        polyline.setMap(map);
                     }
                 </script>
 
@@ -75,9 +78,10 @@
                                         <h1>subscribe</h1>
                                     </div>
                                     <div class="form">
-                                        <form action="" method="POST" id="form1">
-                                            <label>Locations:</label>
-                                            <input type="text" name="locations">
+                                        <form onclick="myFunction()" action="" method="POST" id="form1">
+                                            <label >Locations:</label>
+                                            <label id="demo">--</label>
+                                            {{--<input type="text" name="locations">--}}
                                             <br>
                                             <label>Buckets:</label>
                                             <input type="text" name="buckets">
