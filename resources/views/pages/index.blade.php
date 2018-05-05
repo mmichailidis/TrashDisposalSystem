@@ -88,14 +88,7 @@
                                             <br>
                                             <label>Limitsof the road:</label>
                                             <input type="text" name="limits">
-                                        </form>
-                                    </div>
 
-                                    <div class="subscribe">
-                                        <h1>Subscribe to get the latest <span>news &amp; updates</span>.</h1>
-
-                                        <form>
-                                            <input type="email" placeholder="Your email address">
                                             <input type="submit" value="Subscribe">
                                         </form>
                                     </div>
