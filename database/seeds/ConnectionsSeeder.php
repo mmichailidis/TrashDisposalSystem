@@ -125,7 +125,11 @@ class ConnectionsSeeder extends Seeder
         ]);
         DB::table('connections')->insert([
             'route_village' => 8,
-            'connected_village' => 6
+            'connected_village' => 10
+        ]);
+        DB::table('connections')->insert([
+            'route_village' => 6,
+            'connected_village' => 5
         ]);
     }
 }
