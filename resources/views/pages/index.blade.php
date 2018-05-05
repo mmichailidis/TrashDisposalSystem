@@ -10,8 +10,8 @@
 
                 <script>
                     var locations = [
-                        @foreach($village as $vi)
-                            [ '{{$vi->name}}', {{$vi->latitude}}, {{$vi->longitude}}, {{$vi->id}} ],
+                            @foreach($village as $vi)
+                        ['{{$vi->name}}', {{$vi->latitude}}, {{$vi->longitude}}, {{$vi->id}} ],
                         @endforeach
                     ];
 
@@ -45,8 +45,8 @@
 
                         var destination = [];
                         @foreach($village as $v)
-                            destination.push (new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
-                        @endforeach
+                            destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));
+                                @endforeach
                         var polylineOptions = {path: destination};
                         var polyline = new google.maps.Polyline(polylineOptions);
                         polyline.setMap(map);
@@ -59,42 +59,59 @@
             </div>
             <div class="col-sm-6">
                 <div container>
-                        <div class="button">
-                            <button><span>Click Me</span></button>
-                        </div>
+                    <div class="button">
+                        <button><span>Click Me</span></button>
+                    </div>
 
-                        <div class="pop-up">
-                            <div class="content">
-                                <div class="container">
-                                    <div class="dots">
-                                        <div class="dot"></div>
-                                        <div class="dot"></div>
-                                        <div class="dot"></div>
-                                    </div>
+                    <div class="pop-up">
+                        <div class="content">
+                            <div class="container">
+                                <div class="dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
 
-                                    <span class="close">close</span>
+                                <span class="close">close</span>
 
-                                    <div class="title">
-                                        <h1>subscribe</h1>
-                                    </div>
-                                    <div class="form">
-                                        <form onclick="myFunction()" action="" method="POST" id="form1">
-                                            <label >Locations:</label>
-                                            <label id="demo">--</label>
-                                            {{--<input type="text" name="locations">--}}
-                                            <br>
-                                            <label>Buckets:</label>
-                                            <input type="text" name="buckets">
-                                            <br>
-                                            <label>Limitsof the road:</label>
-                                            <input type="text" name="limits">
-
+                                <div class="title">
+                                    <h1>subscribe</h1>
+                                </div>
+                                <div class="form">
+                                    <form onclick="myFunction()" action="" method="POST" id="form1">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Locations:</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label id="demo">--</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Buckets:</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" name="buckets">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Limitsof the road:</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" name="limits">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            </br>
                                             <input type="submit" value="Subscribe">
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
 
