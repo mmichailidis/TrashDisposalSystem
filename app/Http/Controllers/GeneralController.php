@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\AlgorithmBuilder;
 use App\Services\AlgorithmExecutor;
-use App\Services\VillageSchematics;
 use App\Services\DistanceCalculator;
+use App\Services\VillageSchematics;
 use App\Village;
 use App\VillageConnection;
 use Illuminate\Http\Request;
@@ -24,7 +24,30 @@ class GeneralController extends Controller
     public function index()
     {
         $village  = Village::all();
-        $villageConn = VillageConnection::all();
+        $combinations = VillageConnection::all();
+        $tmpCombinations = $combinations->toArray();
+
+        $villageConn = [];
+        $i=1;
+        foreach ($combinations as $combination) {
+            $needle = [
+                "id" => $i,
+                "route_village" => $combination->route_village,
+                "connected_village" => $combination->connected_village
+            ];
+            $i++;
+           if(array_search($needle ,$tmpCombinations)){
+               $villageConn[] = $combination;
+           }
+
+           foreach($tmpCombinations as $key => $tmp){
+               if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village){
+                   unset($tmpCombinations[$key]);
+               }
+            }
+
+        }
+
         return view('pages.index')->withVillage($village)->withVillageConn($villageConn);
     }
 
