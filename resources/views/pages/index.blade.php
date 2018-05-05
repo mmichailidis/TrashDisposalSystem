@@ -45,17 +45,17 @@
 
                         var destination = [];
                         @foreach($villageConn as $con)
-                                {{--@foreach($village as $v)--}}
-                                    {{--@if(($con->route_village)==($v->id))--}}
-                                    {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
-                                    {{--@endif--}}
-                                    {{--@if(($con->connected_village)==($v->id))--}}
-                                    {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
-                                {{--@endif--}}
-                                {{--@endforeach--}}
-                                destination.push(new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}));
-                                destination.push(new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}}));
-                         @endforeach
+                        {{--@foreach($village as $v)--}}
+                        {{--@if(($con->route_village)==($v->id))--}}
+                        {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
+                        {{--@endif--}}
+                        {{--@if(($con->connected_village)==($v->id))--}}
+                        {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
+                        {{--@endif--}}
+                        {{--@endforeach--}}
+                        destination.push(new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}));
+                        destination.push(new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}}));
+                                @endforeach
 
                         for (var a = 0, n = destination.length; a < n; a++) {
                             var coordinates = new Array();
@@ -146,38 +146,55 @@
                                 <div class="dot"></div>
                                 <div class="dot"></div>
                             </div>
-
-                            <span class="close">close</span>
-
+                            {{----------------------}}
                             <div class="title">
                                 <h1>subscribe</h1>
                             </div>
+                            {{----------------------}}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label id="demo">--</label>
+                                </div>
+                            </div>
+                            {{--------FORM2--------------}}
                             <div class="form2">
                                 <div id="form2">
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <label>Locations:</label>
+                                        <div class="col-md-3">
+                                            <label>Vehicle:</label>
                                         </div>
-                                        <div class="col-md-5">
-                                            <label id="demo">--</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <label>Buckets:</label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <input type="text" name="buckets" id="buckets">
+                                        <div class="col-md-3">
+                                            <input type="text" name="Vehicle" id="Vehicle">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <label>Limitsof the road:</label>
+                                        <div class="col-md-3">
+                                            <label>Capacity:</label>
                                         </div>
-                                        <div class="col-md-5">
-                                            <input type="text" name="limits" id="limits">
+                                        <div class="col-md-3">
+                                            <input type="text" name="capacity" id="capacity">
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         </br>
                                         <input type="button" value="Subscribe"/>
@@ -210,3 +227,4 @@
 @endsection
 
 <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
+<link href="{{ asset('css/popup2.css') }}" rel="stylesheet">
