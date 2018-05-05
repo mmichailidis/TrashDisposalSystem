@@ -6,6 +6,8 @@ use App\Services\AlgorithmBuilder;
 use App\Services\AlgorithmExecutor;
 use App\Services\VillageSchematics;
 use App\Services\DistanceCalculator;
+use App\Village;
+use App\VillageConnection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +23,9 @@ class GeneralController extends Controller
 
     public function index()
     {
-        //return all towns, all routes
+        $village  = Village::all();
+        $villageConn = VillageConnection::all();
+        return view('pages.index')->withVillage($village)->withVillageConn($villageConn);
     }
 
     public function distanceCalculator(Request $request)
