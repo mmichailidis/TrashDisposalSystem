@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AlgorithmBuilder;
+use App\Services\AlgorithmExecutor;
+use App\Services\VillageSchematics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +18,13 @@ class GeneralController extends Controller
         //response with object
     }
 
-    public function index(){
+    public function index()
+    {
         //return all towns, all routes
     }
 
-    public function distanceCalculator(Request $request) {
+    public function distanceCalculator(Request $request)
+    {
         if ($request->input['hasData']) {
             //calc for those data
         } else {
@@ -41,6 +46,23 @@ class GeneralController extends Controller
         }
     }
 
+    public function demo(Request $request)
+    {
+        $villagesArray = $request['Villages'];
+        $villages = array();
 
+        foreach ($villagesArray as $village) {
+            $villageSch = VillageSchematics::parse($village);
+            array_push($villages, $villageSch);
+        }
+
+        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+
+        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+            $algorithmExecutor->addVillage($vil);
+        });
+
+        $algorithmExecutor->execute('no data');
+    }
 
 }
