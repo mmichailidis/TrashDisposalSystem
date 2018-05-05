@@ -1,7 +1,6 @@
 @extends('main')
 @section('title' , '| Καλώς Ήρθατε')
 @section('content')
-<<<<<<< HEAD
     <div>
         <h3>My Google Maps Demo</h3>
         <div id="googleMap" style="width:100%;height:400px;"></div>
@@ -46,7 +45,6 @@
 
     </div>
 
-=======
     <div class="button">
         <button><span>Click Me</span></button>
     </div>
@@ -79,39 +77,6 @@
             </div>
         </div>
     </div>
-
-
->>>>>>> f762be5ab7d5a05f0c4daeb7af1d143ab764730c
-    {{--<form action="" method="POST" id="form1">--}}
-        {{--<label>Locations:</label>--}}
-        {{--<input type="text" name="locations">--}}
-        {{--<br>--}}
-        {{--<label>Buckets:</label>--}}
-        {{--<input type="text" name="buckets">--}}
-        {{--<br>--}}
-        {{--<label>Limitsof the road:</label>--}}
-        {{--<input type="text" name="limits">--}}
-    {{--</form>--}}
-
-    {{--<form action="" method="POST" id="form2">--}}
-        {{--<label>Capacity:</label>--}}
-        {{--<input type="text" name="capacity">--}}
-        {{--<br>--}}
-    {{--</form>--}}
-
-    {{--<form action="" method="POST" id="form3">--}}
-        {{--<label>Input:</label>--}}
-        {{--<input type="text" name="input">--}}
-        {{--<br>--}}
-    {{--</form>--}}
-
-    {{--<form action="" method="POST" id="form4">--}}
-        {{--<label>Changecable:</label>--}}
-        {{--<input type="text" name="changecable">--}}
-        {{--<br>--}}
-    {{--</form>--}}
-<<<<<<< HEAD
-=======
 
 
 <script>
@@ -252,8 +217,6 @@
         oacity: 0;
     }
 
-    /* POP-UP
-    ========================================== */
     .pop-up {
         position: absolute;
         top: 50%;
@@ -490,5 +453,4 @@
     }
 
 </style>
->>>>>>> f762be5ab7d5a05f0c4daeb7af1d143ab764730c
 @endsection
