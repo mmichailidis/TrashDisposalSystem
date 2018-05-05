@@ -8,22 +8,29 @@
                 <h3>My Google Maps Demo</h3>
                 <div id="googleMap" style="width:100%;height:400px;"></div>
 
+                @foreach($villageConn as $vi)
+                     {{$vi}}
+                @endforeach
                 {{--<script async defer--}}
                 {{--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY7MUrUKE60VHv-MolOuwADCelvq8Wk4E&callback=initMap">--}}
                 {{--</script>--}}
 
                 <script>
                     var locations = [
-                        ['Athens', 37.9833333, 23.7333333 , 1],
-                        ['Serres', 41.0855556, 23.5497222, 2],
-                        ['Thessaloniki',40.6402778, 22.9438889, 3]
+                        @foreach($village as $vi)
+                            [ '{{$vi->name}}', {{$vi->latitude}}, {{$vi->longitude}}, {{$vi->id}} ],
+                        @endforeach
                     ];
+
                     function myMap() {
-                        var Thessaloniki = new google.maps.LatLng(40.6402778,22.9438889);
+                        var Serres = new google.maps.LatLng(41.092083, 23.541016);
                         var mapCanvas = document.getElementById("googleMap");
-                        var mapOptions = {center: Thessaloniki,zoom: 5};
+                        var mapOptions = {center: Serres, zoom: 11};
                         var map = new google.maps.Map(mapCanvas, mapOptions);
-                        var marker = new google.maps.Marker({position:Thessaloniki,animation: google.maps.Animation.BOUNCE});
+                        var marker = new google.maps.Marker({
+                            position: Serres,
+                            animation: google.maps.Animation.BOUNCE
+                        });
                         marker.setMap(map);
                         var infowindow = new google.maps.InfoWindow({});
                         var marker2, i;
@@ -33,8 +40,8 @@
                                 map: map,
                                 animation: google.maps.Animation.BOUNCE
                             });
-                            google.maps.event.addListener(marker2, 'click', (function(marker2, i) {
-                                return function() {
+                            google.maps.event.addListener(marker2, 'click', (function (marker2, i) {
+                                return function () {
                                     infowindow.setContent(locations[i][0]);
                                     infowindow.open(map, marker2);
                                 }
@@ -93,11 +100,11 @@
             </div>
 
             <script>
-                $("button").click(function() {
+                $("button").click(function () {
                     $(".pop-up").addClass("open");
                 });
 
-                $(".pop-up .close").click(function() {
+                $(".pop-up .close").click(function () {
                     $(".pop-up").removeClass("open");
                 });
             </script>
