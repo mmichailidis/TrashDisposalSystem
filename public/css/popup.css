@@ -76,11 +76,12 @@
 /* BUTTON
 ========================================== */
 .button {
-
-    position: absolute;
-    top: 58px;
-    right: 16px;
-    font-size: 18px;
+    display: flex;
+    justify-content: flex-end;
+    /*position: absolute;*/
+    /*top: 58px;*/
+    /*right: 16px;*/
+    /*font-size: 18px;*/
 
     /*position: relative;*/
     /*top: 0;*/
@@ -92,9 +93,9 @@
     /*z-index: 2;*/
 }
 .button button {
-    position: absolute;
-    top: -650px;
-    right: -20px;
+    /*position: absolute;*/
+    /*top: -650px;*/
+    /*right: -20px;*/
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -134,9 +135,12 @@
 }
 
 .pop-up {
-    position: absolute;
-    top: 20px;
-    right: -750px;
+    position: relative;
+    display: inline-block;
+    /*display: flex;*/
+    /*position: absolute;*/
+    /*top: 20px;*/
+    /*right: -750px;*/
     -webkit-transform: translate(-50%, -50%) scale(0.9);
     -moz-transform: translate(-50%, -50%) scale(0.9);
     -ms-transform: translate(-50%, -50%) scale(0.9);
