@@ -4,9 +4,13 @@
 
     <div class="container-fluid">
         <div class="row">
-                <h3 style="text-align:center;">Trash Disposal System</h3>
+            <div class="col-sm-6">
+                <h3>Trash Disposal System</h3>
+                <div id="googleMap" style="width:100%;height:85%;"></div>
 
-            <div id="googleMap" style="width:100%;height:85%;"></div>
+
+            </div>{{--End col of general row--}}
+
 
             {{--Pop Up1 Menus--}}
             <div class="col-sm-6">
@@ -27,31 +31,31 @@
                                 <span class="close">close</span>
 
                                 <div class="title">
-                                    <h1>Map Control</h1>
+                                    <h1>subscribe</h1>
                                 </div>
                                 <div class="form">
                                     <div id="form">
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <label title="Locations">Locations:</label>
+                                            <div class="col-md-5">
+                                                <label>Locations:</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-5">
                                                 <label id="demo">--</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <label title="Buckets">Buckets:</label>
+                                            <div class="col-md-5">
+                                                <label>Buckets:</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-5">
                                                 <input type="text" name="buckets" id="buckets">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <label title="Limits of the road">Limits:</label>
+                                            <div class="col-md-5">
+                                                <label>Limits of the road:</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-5">
                                                 <input type="text" name="limits" id="limits">
                                             </div>
                                         </div>
