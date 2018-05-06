@@ -125,10 +125,13 @@ class GeneralController extends Controller
 
     public function demo(Request $request)
     {
-        $villagesArray = $request['Villages'];
-        $villages = array();
+        $parseFile = file_get_contents('files/b1.txt');
 
-        foreach ($villagesArray as $village) {
+        $villagesArray = $parseFile;
+        $villages = array();
+        $decVil = json_decode($villagesArray);
+
+        foreach ($decVil as $village) {
             $villageSch = VillageSchematics::parse($village);
             array_push($villages, $villageSch);
         }
