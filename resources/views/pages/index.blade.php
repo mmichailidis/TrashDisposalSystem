@@ -8,132 +8,6 @@
                 <h3>Trash Disposal System</h3>
                 <div id="googleMap" style="width:100%;height:85%;"></div>
 
-                <script>
-                    var locations = [
-                            @foreach($village as $vi)
-                        ['{{$vi->name}}', {{$vi->latitude}}, {{$vi->longitude}}, {{$vi->id}} ],
-                        @endforeach
-                    ];
-                    var aa = '';
-
-                    function myMap() {
-                        var Serres = new google.maps.LatLng(41.092083, 23.541016);
-                        var mapCanvas = document.getElementById("googleMap");
-                        var mapOptions = {center: Serres, zoom: 11};
-                        var map = new google.maps.Map(mapCanvas, mapOptions);
-                        var marker = new google.maps.Marker({
-                            position: Serres,
-                            animation: google.maps.Animation.BOUNCE
-                        });
-                        marker.setMap(map);
-                        var infowindow = new google.maps.InfoWindow({});
-                        var marker2, i;
-                        for (i = 0; i < locations.length; i++) {
-                            marker2 = new google.maps.Marker({
-                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                map: map,
-                                animation: google.maps.Animation.BOUNCE
-                            });
-                            google.maps.event.addListener(marker2, 'click', (function (marker2, i) {
-                                return function () {
-                                    infowindow.setContent(locations[i][0]);
-                                    infowindow.open(map, marker2);
-                                    aa = document.getElementById("demo").innerHTML = (locations[i][0]);
-
-                                }
-                            })(marker2, i));
-                        }
-
-                        var destination = [];
-                        @foreach($villageConn as $con)
-                        {{--@foreach($village as $v)--}}
-                        {{--@if(($con->route_village)==($v->id))--}}
-                        {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
-                        {{--@endif--}}
-                        {{--@if(($con->connected_village)==($v->id))--}}
-                        {{--destination.push(new google.maps.LatLng({{$v->latitude}}, {{$v->longitude}}));--}}
-                        {{--@endif--}}
-                        {{--@endforeach--}}
-                        destination.push(new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}));
-                        destination.push(new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}}));
-                                @endforeach
-
-                        for (var a = 0, n = destination.length; a < n; a++) {
-                            var coordinates = new Array();
-                            for (var j = a; j < a + 2 && j < n; j++) {
-                                coordinates[j - a] = destination[j];
-                            }
-
-                            var lineSymbol = [{
-                                icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},
-                                offset: '100%',
-                            }];
-                            var polylineOptions = {path: coordinates, icons: lineSymbol};
-                            var polyline = new google.maps.Polyline(polylineOptions);
-
-
-                            polyline.setMap(map);
-//                            polylines.push(polyline);
-                        }
-
-                    }
-
-
-                    function myFunction2() {
-                        $(".button").addClass('hidden');
-                        $(".pop-up").addClass("hidden");
-                        $(".pop-up2").removeAttr('hidden');
-
-                        // var a = document.getElementById("buckets").value;
-                        var x = document.getElementById("buckets").value;
-                        var y = document.getElementById("limits").value;
-                        var onoma = [];
-
-                        $("#Loc").data("test", {first: onoma}).push(new townObj(aa, x, y));
-
-                        console.log($("#Loc").data("test").first);
-
-                        $("#demodemo").click(function () {
-                            document.getElementById("Loc").innerHTML = $("#Loc").data("test").first.location;
-                        });
-
-                        document.getElementById("Loc").innerHTML = aa;
-                        document.getElementById("Buck").innerHTML = x;
-                        document.getElementById("Limits").innerHTML = y;
-                    }
-
-                    var townObj = class {
-                        constructor(location, buck, limit) {
-                            this._location = location;
-                            this._buck = buck;
-                            this._limit = limit;
-                        }
-
-                        get location() {
-                            return this._location;
-                        }
-
-                        get buck() {
-                            return this._buck;
-                        }
-
-                        get limit() {
-                            return this._limit;
-                        }
-
-
-                        toString() {
-                            return this._location + this._buck + this._limit;
-                        }
-                    }
-
-                    function myFunctionB1() {
-
-                    }
-                </script>
-
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0ytnOS1jsLVniRSMiCZN3QyfOqBBcHJs&callback=myMap"></script>
-
 
             </div>{{--End col of general row--}}
 
@@ -221,93 +95,121 @@
                         <div class="w3-theme-l4">
                             {{--<div style="min-width:400px">--}}
 
-                                <div class="w3-container w3-content">
+                            <div class="w3-container w3-content">
+                                <div class="w3-panel w3-white w3-card w3-display-container">
                                     <div class="w3-panel w3-white w3-card w3-display-container">
-                                        <div class="w3-panel w3-white w3-card w3-display-container">
 
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label id="Locations">Locations:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label id="Loc">--</label>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label id="Locations">Locations:</label>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label id="buck">Buckets:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label id="Buck">--</label>
-                                                    {{--<p id="demo666"></p>--}}
-                                                </div>
+                                            <div class="col-md-3">
+                                                <label id="Loc">--</label>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label id="demo3">Limits of the road:</label>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label id="Limits">--</label>
-                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label id="buck">Buckets:</label>
                                             </div>
-
-
-                                            <div class="form2">
-                                                <div id="form2">
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <label>Vehicle:</label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <input type="text" name="Vehicle" id="Vehicle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <label>Capacity:</label>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <input type="text" name="capacity" id="capacity">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        </br>
-                                                        <div class="asda">
-                                                            <input type="button" value="B1" class="b1"/>
-                                                        </div>
-                                                        <input type="button" value="B2"/>
-                                                        <input type="button" value="B2"/>
-                                                        <input type="button" value="B2"/>
-                                                        <input type="button" value="B2"/>
-                                                        <input type="button" value="B6"/>
-                                                        <input type="button" value="Subscribe" id="demodemo"/>
-                                                    </div>
-                                                </div>{{-- End Form2--}}
+                                            <div class="col-md-3">
+                                                <label id="Buck">--</label>
+                                                {{--<p id="demo666"></p>--}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label id="demo3">Limits of the road:</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label id="Limits">--</label>
                                             </div>
                                         </div>
 
+
+                                        <div class="form2">
+                                            <div id="form2">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>Vehicle:</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="Vehicle" id="Vehicle">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label>Capacity:</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="capacity" id="capacity">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    </br>
+                                                    <div class="asda">
+                                                        <input type="button" value="B1" class="b1"/>
+                                                    </div>
+                                                    <input type="button" value="B2"/>
+                                                    <input type="button" value="B2"/>
+                                                    <input type="button" value="B2"/>
+                                                    <input type="button" value="B2"/>
+                                                    <input type="button" value="B6"/>
+                                                    <input type="button" value="Subscribe" id="demodemo"/>
+                                                </div>
+                                            </div>{{-- End Form2--}}
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
-                        </div>{{---------End class Container of cpopup2-------------}}
-                    </div>{{---------End class col-------------}}
-                </div>{{---------End PopUp2-------------}}
+                        </div>
+                    </div>{{---------End class Container of cpopup2-------------}}
+                </div>{{---------End class col-------------}}
+            </div>{{---------End PopUp2-------------}}
 
-                <div class="div1">
+            <div class="div1">
 
-                </div>
-            </div>{{--End General row--}}
-        </div> {{--Close div of general Container--}}
+            </div>
+        </div>{{--End General row--}}
+    </div> {{--Close div of general Container--}}
+    <script>
+        var locations = [
+                @foreach($village as $vi)
+            ['{{$vi->name}}', {{$vi->latitude}}, {{$vi->longitude}}, {{$vi->id}} ],
+            @endforeach
+        ];
+        var aa = '';
 
-        <script>
-            $("button").click(function () {
-                $(".pop-up").addClass("open");
+        function myMap() {
+            var Serres = new google.maps.LatLng(41.092083, 23.541016);
+            var mapCanvas = document.getElementById("googleMap");
+            var mapOptions = {center: Serres, zoom: 11};
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var marker = new google.maps.Marker({
+                position: Serres,
+                animation: google.maps.Animation.BOUNCE
             });
+            marker.setMap(map);
+            var infowindow = new google.maps.InfoWindow({});
+            var marker2, i;
+            for (i = 0; i < locations.length; i++) {
+                marker2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map,
+                    animation: google.maps.Animation.BOUNCE
+                });
+                google.maps.event.addListener(marker2, 'click', (function (marker2, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker2);
+                        aa = document.getElementById("demo").innerHTML = (locations[i][0]);
 
-            $(".pop-up .close").click(function () {
-                $(".pop-up").removeClass("open");
-            });
+                    }
+                })(marker2, i));
+
+                arrowDrawer();
+            }
 
             $(".b1").click(function () {
                 $.ajax({
@@ -316,12 +218,119 @@
                     data: "",
                     dataType: "application/json",
                     success: function (result) {
-                        console.log(result);
+                        var distance = result.distance;
+                        var paths = result.path;
+                        console.log(paths);
+                        arrowDrawer(paths)
                     }
                 });
             });
-        </script>
-        @endsection
 
-        <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/popup2.css') }}" rel="stylesheet">
+            function arrowDrawer(jsonData = null) {
+                var destination = [];
+                console.log('json: ' + jsonData);
+                var coordinates = new Array();
+                if (jsonData === null) {
+                    @foreach($villageConn as $con)
+                    destination.push([
+                        new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}),
+                        new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}})
+                    ]);
+                    console.log(destination);
+
+                    @endforeach
+                } else {
+                    console.log(jsonData);
+                }
+                console.log(coordinates);
+
+                for (var a = 0, max = destination.length; a < max; a++) {
+                    var coordinates = [];
+                    coordinates[0] = destination[a][0];
+                    coordinates[1] = destination[a][1];
+
+                    if (jsonData === null) {
+                        var lineSymbol = [{
+                            icon: {path: google.maps.SymbolPath.LINE},
+                            offset: '100%',
+                        }];
+                    } else {
+                        var lineSymbol = [{
+                            icon: {path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW},
+                            offset: '100%',
+                        }];
+                    }
+
+                    var polylineOptions = {path: coordinates, icons: lineSymbol};
+                    var polyline = new google.maps.Polyline(polylineOptions);
+
+                    polyline.setMap(map);
+                }
+            }
+
+        }
+
+
+        function myFunction2() {
+            $(".button").addClass('hidden');
+            $(".pop-up").addClass("hidden");
+            $(".pop-up2").removeAttr('hidden');
+
+            // var a = document.getElementById("buckets").value;
+            var x = document.getElementById("buckets").value;
+            var y = document.getElementById("limits").value;
+            var onoma = [];
+
+            $("#Loc").data("test", {first: onoma}).push(new townObj(aa, x, y));
+
+            console.log($("#Loc").data("test").first);
+
+            $("#demodemo").click(function () {
+                document.getElementById("Loc").innerHTML = $("#Loc").data("test").first.location;
+            });
+
+            document.getElementById("Loc").innerHTML = aa;
+            document.getElementById("Buck").innerHTML = x;
+            document.getElementById("Limits").innerHTML = y;
+        }
+
+        var townObj = class {
+            constructor(location, buck, limit) {
+                this._location = location;
+                this._buck = buck;
+                this._limit = limit;
+            }
+
+            get location() {
+                return this._location;
+            }
+
+            get buck() {
+                return this._buck;
+            }
+
+            get limit() {
+                return this._limit;
+            }
+
+
+            toString() {
+                return this._location + this._buck + this._limit;
+            }
+        };
+
+
+        $("button").click(function () {
+            $(".pop-up").addClass("open");
+        });
+
+        $(".pop-up .close").click(function () {
+            $(".pop-up").removeClass("open");
+        });
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0ytnOS1jsLVniRSMiCZN3QyfOqBBcHJs&callback=myMap"></script>
+@endsection
+
+<link href="{{ asset('css/popup.css') }}" rel="stylesheet">
+<link href="{{ asset('css/popup2.css') }}" rel="stylesheet">
