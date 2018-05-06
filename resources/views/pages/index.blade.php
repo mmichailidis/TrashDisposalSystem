@@ -7,7 +7,7 @@
 
     <div id="googleMap" style="width:100%;height:100%;"></div>
 
-    <input type="file" value="import" onclick="importFile()">
+    <input type="file" id="fileSelect" value="import" name="import">
 
     {{--Pop Up1 Menus--}}
     <div class="col-sm-6">
@@ -137,22 +137,27 @@
 
                                 <div class="row">
                                     </br>
-                            <div class="ButStyle">
-                                    <div class="b1class">
-                                        <input type="button" value="B1" class="b1"
-                                               onclick="b1Callback()" style="width: 100%"/>
+                                    <div class="ButStyle">
+                                        <div class="b1class">
+                                            <input type="button" value="B1" class="b1"
+                                                   onclick="b1Callback()" style="width: 100%"/>
+                                        </div>
+                                        <div class="b2class">
+                                            <input type="button" value="B2" class="b2"
+                                                   onclick="b2Callback()" style="width: 100%"/>
+                                        </div>
+                                        <div class="b3class">
+                                            <input type="button" value="B3" class="b3"
+                                                   onclick="b3Callback()" style="width: 100%"/>
+                                        </div>
+                                        <div class="b4class">
+                                            <input type="button" value="B4" class="b4"
+                                                   onclick="b4Callback()" style="width: 100%"/>
+                                        </div>
+                                        <input type="button" value="B5" style="width: 100%"/>
+                                        <input type="button" value="B6" style="width: 100%"/>
+                                        <input type="button" value="Subscribe" id="demodemo" style="width: 100%"/>
                                     </div>
-                                    <div class="b2class">
-                                        <input type="button" value="B2" class="b2"
-                                                onclick="b2Callback()" style="width: 100%"/>
-                                    </div>
-
-                                    <input type="button" value="B3" style="width: 100%"/>
-                                    <input type="button" value="B4" style="width: 100%"/>
-                                    <input type="button" value="B5" style="width: 100%"/>
-                                    <input type="button" value="B6" style="width: 100%"/>
-                                    <input type="button" value="Subscribe" id="demodemo" style="width: 100%"/>
-                            </div>
                                 </div>
                             </div>{{-- End Form2--}}
                         </div>
@@ -230,9 +235,6 @@
                             new google.maps.LatLng(lastExpl[1], lastExpl[2])
                         ]);
                     }
-
-                    console.log(destination);
-
                 }
 
                 for (var a = 0, max = destination.length; a < max; a++) {
@@ -286,8 +288,54 @@
             });
         }
 
-        function importFile() {
+        function b3Callback() {
+            $.ajax({
+                url: "http://localhost:8000/b3",
+                type: "POST",
+                success: function (data) {
+                    myMap(data.path)
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
+        }
 
+        function b4Callback() {
+            $.ajax({
+                url: "http://localhost:8000/b4",
+                type: "POST",
+                success: function (data) {
+                    myMap(data.path)
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
+        }
+
+        var files;
+        $('input[type=file]').on('change', importFile);
+
+        function importFile() {
+            files = event.target.files;
+            console.log(files);
+
+            $.ajax({
+                url: "http://localhost:8000/calculate",
+                type: "POST",
+                data: files,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function () {
+                    console.log('hi');
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
         }
 
 
