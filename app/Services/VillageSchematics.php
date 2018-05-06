@@ -42,10 +42,10 @@ class VillageSchematics
     {
         $vS = new VillageSchematics();
 
-        $vS->name = $json['name'];
-        $vS->bin = $json['bin'];
-        $vS->size = $json['capacity'];
-        $vS->onlyOnce = $json['OTO'];
+        $vS->name = $json->name;
+        $vS->bin = $json->bin;
+        $vS->size = $json->capacity;
+        $vS->onlyOnce = $json->OTO;
 
         $village = Village::where(["name" => $vS->name])->first();
         $vS->id = $village->id;
@@ -58,8 +58,8 @@ class VillageSchematics
 
     function setRoutes()
     {
-        $con = DB::select(DB::raw('SELECT vill.name as destination FROM TrashDisposalSystem.connections as conn
-            INNER JOIN TrashDisposalSystem.villages as vill ON vill.id = conn.connected_village
+        $con = DB::select(DB::raw('SELECT vill.name as destination FROM connections as conn
+            INNER JOIN villages as vill ON vill.id = conn.connected_village
             where conn.route_village = ' . $this->id
         ));
 
