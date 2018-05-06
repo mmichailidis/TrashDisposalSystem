@@ -343,7 +343,7 @@ class Algorithm
         $start = null;
         $end = null;
         $maxIterations = 15;
-        $decidedPath = [];
+        $decidedPath = array();
 
         foreach ($this->villages as $village) {
             if ($village->getType() == "start") {
@@ -361,20 +361,22 @@ class Algorithm
             $vil = $this->locateVillage($area->getName());
             $innerVillages[$vil->getName()] = $vil;
         }
+        $trackReturn = [];
 
         for ($track = 0; $track < 2; $track++) {
             $exitFlag = true;
             $current = $start;
             $size = 0;
-            array_push($decidedPath, "=======");
+            $decidedPath[$track] = "";
             do {
-                array_push($decidedPath, $current->getName());
+                $decidedPath[$track] = $decidedPath[$track] . '{' . $current->getName() . ',' . $current->getLat()
+                    . ',' . $current->getLon() . '}' . ":";
                 $nearLocations = $this->findNearFullCans($current);
                 $found = [];
                 if (empty($nearLocations)) {
                     $all = $current->getAvailableRoutes();
                     $path = rand(0, count($all) - 1);
-                    $current = $this->locateVillage($path);
+                    $current = $this->locateVillage($all[$path]);
                     continue;
                 }
 
@@ -397,35 +399,28 @@ class Algorithm
                 $current->setSize(0);
                 $size += 100;
                 if ($size === 400) {
-                    $this->getTargetedPath($current->getName(), $end->getName());
+                    $returnData = $this->getTargetedPath($current->getName(), $end->getName());
+                    array_push($trackReturn, $returnData);
                     $exitFlag = false;
                 }
-
             } while ($exitFlag);
         }
-        dd("hello", $decidedPath);
-        $pathToReturn = "";
-        $distanceToReturn = 0;
-        $toMerge = [];
-        foreach ($decidedPath as $path) {
-            $distanceToReturn += $path['distance'];
-            $splitted = explode(":", substr($path['path'], 0, strlen($path['path']) - 1));
 
-            foreach ($splitted as $slice) {
-                if (empty($toMerge)) {
-                    array_push($toMerge, $slice);
+        $strPath = "";
+        $i = 0;
+        foreach ($trackReturn as $backRoute) {
+            $lastVal = "";
+            foreach ($backRoute as $result) {
+                if ($lastVal === $result->getName())
                     continue;
-                }
-                if ($toMerge[count($toMerge) - 1] != $slice) {
-                    array_push($toMerge, $slice);
-                }
+                $item = $this->locateVillage($result->getName());
+                $decidedPath[$i] = $decidedPath[$i] . '{' . $result->getName() . ',' . $item->getLat() . ',' . $item->getLon() . '}' . ":";
+                $lastVal = $result->getName();
             }
-        }
-        foreach ($toMerge as $part) {
-            $pathToReturn = $pathToReturn . ":" . $part;
+            $i++;
         }
 
-        return ['path' => $pathToReturn, 'distance' => $distanceToReturn];
+        return ['path' => $decidedPath];
     }
 
     function execute()
