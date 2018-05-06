@@ -10,6 +10,7 @@ use App\Village;
 use App\VillageConnection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class GeneralController extends Controller
@@ -26,7 +27,6 @@ class GeneralController extends Controller
         $village = Village::all();
         $combinations = VillageConnection::all();
         $tmpCombinations = $combinations->toArray();
-
         $villageConn = [];
         $i = 1;
         foreach ($combinations as $combination) {
@@ -36,9 +36,11 @@ class GeneralController extends Controller
                 "connected_village" => $combination->connected_village
             ];
             $i++;
+            array_unshift($tmpCombinations, [0, 0, 0]);
             if (array_search($needle, $tmpCombinations)) {
                 $villageConn[] = $combination;
             }
+            unset($tmpCombinations[0]);
 
             foreach ($tmpCombinations as $key => $tmp) {
                 if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village) {
@@ -47,7 +49,6 @@ class GeneralController extends Controller
             }
 
         }
-
         foreach ($villageConn as $key => $value) {
             $route = DB::select(DB::raw(
                 'SELECT latitude, longitude FROM villages WHERE id = ' . $value->route_village
