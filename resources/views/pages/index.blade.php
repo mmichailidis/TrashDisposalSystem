@@ -91,36 +91,39 @@
                     {{--<div style="min-width:400px">--}}
                     <div class="w3-panel w3-white w3-card w3-display-container">
 
-                                </div>
+                    </div>
 
-                                <div class="row">
-                                    </br>
-                                    <div class="ButStyle">
-                                        <div class="b1class">
-                                            <input type="button" value="B1" class="b1"
-                                                   onclick="b1Callback()" style="width: 100%"/>
-                                        </div>
-                                        <div class="b2class">
-                                            <input type="button" value="B2" class="b2"
-                                                   onclick="b2Callback()" style="width: 100%"/>
-                                        </div>
-                                        <div class="b3class">
-                                            <input type="button" value="B3" class="b3"
-                                                   onclick="b3Callback()" style="width: 100%"/>
-                                        </div>
-                                        <div class="b4class">
-                                            <input type="button" value="B4" class="b4"
-                                                   onclick="b4Callback()" style="width: 100%"/>
-                                        </div>
-                                        <input type="button" value="B5" style="width: 100%"/>
-                                        <input type="button" value="B6" style="width: 100%"/>
-                                        <input type="button" value="Check Routes" id="demodemo" style="width: 100%"/>
-                                    </div>
-                                </div>
-                            </div>{{-- End Form2--}}
+                    <div class="row">
+                        </br>
+                        <div class="ButStyle">
+                            <div class="b1class">
+                                <input type="button" value="B1" class="b1"
+                                       onclick="b1Callback()" style="width: 100%"/>
+                            </div>
+                            <div class="b2class">
+                                <input type="button" value="B2" class="b2"
+                                       onclick="b2Callback()" style="width: 100%"/>
+                            </div>
+                            <div class="b3class">
+                                <input type="button" value="B3" class="b3"
+                                       onclick="b3Callback()" style="width: 100%"/>
+                            </div>
+                            <div class="b4class">
+                                <input type="button" value="B4" class="b4"
+                                       onclick="b4Callback()" style="width: 100%"/>
+                            </div>
+                            <div class="b5class">
+                                <input type="button" value="B5" class="b5"
+                                       onclick="b5Callback()" style="width: 100%"/>
+                            </div>
+                            {{--<input type="button" value="B6" style="width: 100%"/>--}}
+                            {{--<input type="button" value="Check Routes" id="demodemo" style="width: 100%"/>--}}
                         </div>
                     </div>
-                </div>
+                </div>{{-- End Form2--}}
+            </div>
+        </div>
+    </div>
 
     <div class="div1">
 
@@ -134,7 +137,7 @@
         ];
         var aa = '';
 
-        function myMap(jsonData = null) {
+        function myMap(jsonData = null, color = null) {
             var Serres = new google.maps.LatLng(41.092083, 23.541016);
             var mapCanvas = document.getElementById("googleMap");
             var mapOptions = {center: Serres, zoom: 11};
@@ -161,10 +164,10 @@
                     }
                 })(marker2, i));
 
-                arrowDrawer(jsonData);
+                arrowDrawer(jsonData, color);
             }
 
-            function arrowDrawer(jsonData) {
+            function arrowDrawer(jsonData, color) {
                 var destination = [];
                 var coordinates = new Array();
                 if (jsonData === null) {
@@ -176,25 +179,50 @@
 
                     @endforeach
                 } else {
-                    var myData = jsonData;
-                    var explodeData = myData.split(":");
-                    for (var ar = 1, maxAr = explodeData.length; ar < maxAr; ar++) {
-                        var line = explodeData[ar].trim().substr(1, explodeData[ar].length - 2);
-                        var previousLine = explodeData[ar - 1].trim().substr(1, explodeData[ar - 1].length - 2);
+                    if (color === null) {
+                        var myData = jsonData;
+                        var explodeData = myData.split(":");
+                        for (var ar = 1, maxAr = explodeData.length; ar < maxAr; ar++) {
+                            var line = explodeData[ar].trim().substr(1, explodeData[ar].length - 2);
+                            var previousLine = explodeData[ar - 1].trim().substr(1, explodeData[ar - 1].length - 2);
 
-                        var lastExpl = line.split(',');
-                        var previousLastExpl = previousLine.split(',');
-                        destination.push([
-                            new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2]),
-                            new google.maps.LatLng(lastExpl[1], lastExpl[2])
-                        ]);
+                            var lastExpl = line.split(',');
+                            var previousLastExpl = previousLine.split(',');
+                            destination.push([
+                                new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2]),
+                                new google.maps.LatLng(lastExpl[1], lastExpl[2])
+                            ]);
+                        }
+                    } else {
+                        var myData = jsonData;
+                        for (var t = 0, max = 2; t < max; t++) {
+                            var explodeData = myData[t].split(":");
+                            for (var ar = 1, maxAr = explodeData.length; ar < maxAr; ar++) {
+                                var line = explodeData[ar].trim().substr(1, explodeData[ar].length - 2);
+                                var previousLine = explodeData[ar - 1].trim().substr(1, explodeData[ar - 1].length - 2);
+
+                                var lastExpl = line.split(',');
+                                var previousLastExpl = previousLine.split(',');
+                                destination.push([
+                                    new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2]),
+                                    new google.maps.LatLng(lastExpl[1], lastExpl[2]),
+                                    t === 0 ? '#000000' : '#00FF00'
+                                ]);
+                            }
+                        }
+
                     }
+
                 }
 
                 for (var a = 0, max = destination.length; a < max; a++) {
                     var coordinates = [];
                     coordinates[0] = destination[a][0];
                     coordinates[1] = destination[a][1];
+                    var color = '#000000';
+                    if (typeof destination[a][2] !== 'undefined') {
+                        color = destination[a][2];
+                    }
 
                     if (jsonData === null) {
                         var lineSymbol = [{
@@ -208,7 +236,12 @@
                         }];
                     }
 
-                    var polylineOptions = {path: coordinates, icons: lineSymbol};
+                    if (color === null) {
+                        var polylineOptions = {path: coordinates, icons: lineSymbol, strokeColor: color};
+                    } else {
+                        var polylineOptions = {path: coordinates, icons: lineSymbol, strokeColor: color};
+                    }
+
                     var polyline = new google.maps.Polyline(polylineOptions);
 
                     polyline.setMap(map);
@@ -268,28 +301,40 @@
             });
         }
 
-        var files;
-        $('input[type=file]').on('change', importFile);
-
-        function importFile() {
-            files = event.target.files;
-            console.log(files);
-
+        function b5Callback() {
             $.ajax({
-                url: "http://localhost:8000/calculate",
+                url: "http://localhost:8000/b5",
                 type: "POST",
-                data: files,
-                cache: false,
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                success: function () {
-                    console.log('hi');
+                success: function (data) {
+                    myMap(data.path, true)
                 },
                 error: function (req, status, err) {
                     console.log('something went wrong', status, err);
                 }
             });
+        }
+
+        var files;
+        $('input[type=file]').on('change', importFile);
+
+        function importFile() {
+            files = event.target.files;
+
+            // $.ajax({
+            //     url: "http://localhost:8000/calculate",
+            //     type: "POST",
+            //     data: files[0],
+            //     cache: false,
+            //     dataType: 'json',
+            //     processData: false,
+            //     contentType: false,
+            //     success: function () {
+            //         console.log('hi');
+            //     },
+            //     error: function (req, status, err) {
+            //         console.log('something went wrong', status, err);
+            //     }
+            // });
         }
 
 
