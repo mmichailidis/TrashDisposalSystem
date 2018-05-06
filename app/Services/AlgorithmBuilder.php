@@ -14,7 +14,6 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
     private $algorithm;
     private $tracks = array();
     private $villages = array();
-    private $lastNodeOneTimeStatus = false;
 
     public function __construct()
     {
@@ -31,10 +30,6 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
         array_push($this->villages, $village);
     }
 
-    public function lastNodeOneTimeOnlyStatus(bool $flag){
-        $this->lastNodeOneTimeStatus = $flag;
-    }
-
     public function getAlgorithm(): Algorithm
     {
         foreach ($this->villages as $village) {
@@ -43,7 +38,6 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
 
         $this->algorithm->addTracks($this->tracks);
         $this->algorithm->addVillages($this->villages);
-        $this->algorithm->lastNodeOneTimeStatus($this->lastNodeOneTimeStatus);
 
         return $this->algorithm;
     }

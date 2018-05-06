@@ -8,10 +8,11 @@
  */
 namespace App\Services;
 
+use App\Village;
+
 abstract class AbstractAlgorithmBuilder
 {
     abstract function getAlgorithm(): Algorithm;
     abstract function addTrack(Track $track);
     abstract function addVillage(VillageSchematics $village);
-    abstract function lastNodeOneTimeOnlyStatus(bool $flag);
 }

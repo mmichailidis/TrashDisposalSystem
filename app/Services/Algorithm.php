@@ -19,7 +19,6 @@ class Algorithm
     private $calculator;
     private $villages = array();
     private $tracks = array();
-    private $lastNodeOneTimeStatus;
 
     function addVillages(array $village)
     {
@@ -31,12 +30,7 @@ class Algorithm
         $this->tracks = $track;
     }
 
-    function lastNodeOneTimeStatus(bool $lastNodeOneTimeStatus)
-    {
-        $this->lastNodeOneTimeStatus = $lastNodeOneTimeStatus;
-    }
-
-    function execute()
+    function execute($data)
     {
         $this->calculator = new DistanceCalculator();
 
@@ -73,20 +67,9 @@ class Algorithm
 
                 $currentVillage->setVisitedTrue();
 
-                if ($this->lastNodeOneTimeStatus && $vilObj->getName() == $end->getName()) {
-                    Log::info("Canceling as the village selected is the last");
-                    $areAllNodesVisited = $this->areAllSurroundingVisited($currentVillage->getAvailableRoutes());
-                    if ($areAllNodesVisited) {
-                        Log::info("Activated locator");
-                        $useLocator = true;
-                    }
-                    continue;
-                }
-
                 if ($vilObj->isVisited()) {
                     Log::info("Canceled");
                     $areAllNodesVisited = $this->areAllSurroundingVisited($currentVillage->getAvailableRoutes());
-
                     if ($areAllNodesVisited) {
                         $useLocator = true;
                     }
@@ -159,22 +142,13 @@ class Algorithm
 
     public function getTargetedPath($from, $to, $fromPath = array(), $endFlag = false)
     {
-        $vil = $this->locateVillage($to);
-        $skipEnd = false;
-        if ($vil->getType() !== "end") {
-            $skipEnd = true;
-        }
-
-        Log::info("Starting targeted path with rules skipEnd: " . $skipEnd . " endUses: " .
-            $this->lastNodeOneTimeStatus . " villageName: " . $vil->getName());
-
         $graph = new GraphHandler();
 
         $nodes = [];
 
         foreach ($this->villages as $village) {
             $node = new Node($village->getName());
-            if ($village->getType() === "end" && $skipEnd && $this->lastNodeOneTimeStatus) {
+            if ($village->getType() === "end" && $this->lastNodeOneTimeStatus && $skipEnd) {
                 Log::info("Skipping ending point(1)");
                 continue;
             }
@@ -182,16 +156,10 @@ class Algorithm
             $node->addChild($village);
             $nodes[$village->getName()] = $node;
         }
-
         foreach ($nodes as $node) {
             $villageObj = $this->locateVillage($node->getName());
             foreach ($villageObj->getAvailableRoutes() as $route) {
                 $villageTarget = $this->locateVillage($route);
-                if ($villageTarget->getType() === "end" && $skipEnd && $this->lastNodeOneTimeStatus) {
-                    Log::info("Skipping ending point(2)");
-                    continue;
-                }
-
                 $cal = $this->calculator->calculateDistance($villageObj->getLat(), $villageObj->getLon(),
                     $villageTarget->getLat(), $villageTarget->getLon());
 
@@ -263,7 +231,7 @@ class Algorithm
     {
         foreach ($names as $name) {
             $vil = $this->locateVillage($name);
-            if (!$vil->isVisited() && !($this->lastNodeOneTimeStatus && $vil->getType() === "end")) {
+            if (!$vil->isVisited()) {
                 return false;
             }
         }
@@ -275,9 +243,13 @@ class Algorithm
         $toReturn = array();
         foreach ($this->villages as $village) {
             if (!$village->isVisited()) {
+                if ($village->getType() === "end" && $this->lastNodeOneTimeStatus) {
+                    continue;
+                }
                 array_push($toReturn, $village);
             }
         }
+
         return $toReturn;
     }
 
