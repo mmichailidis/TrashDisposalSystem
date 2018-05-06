@@ -13,7 +13,9 @@
     <div class="col-sm-6">
         <div class="container">
             <div class="button">
-                <button><span>Click Me</span></button>
+                <div>
+                    <input type="button" value="Check Routes" onclick="myFunction2()"/>
+                </div>
             </div>
 
             <div class="pop-up">
@@ -56,7 +58,7 @@
                                         <input type="text" name="limits" id="limits">
                                     </div>
                                 </div>
-                                <div class="row click-me">
+                                <div class="row">
                                     </br>
                                     <input type="button" value="Subscribe" onclick="myFunction2()"/>
                                 </div>
@@ -89,50 +91,6 @@
                     {{--<div style="min-width:400px">--}}
                     <div class="w3-panel w3-white w3-card w3-display-container">
 
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label id="Locations">Locations:</label>
-                            </div>
-                            <div class="col-md-5">
-                                <label id="Loc" title="Locations">--</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label id="buck">Buckets:</label>
-                            </div>
-                            <div class="col-md-5">
-                                <label id="Buck" title="Buckets">--</label>
-                                {{--<p id="demo666"></p>--}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label id="demo3" title="Limits of the road">Limits:</label>
-                            </div>
-                            <div class="col-md-5">
-                                <label id="Limits">--</label>
-                            </div>
-                        </div>
-
-
-                        <div class="form2">
-                            <div id="form2">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label>Vehicle:</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input type="text" name="Vehicle" id="Vehicle" size="4">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label>Capacity:</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input type="text" name="capacity" id="capacity" size="4">
-                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -156,17 +114,13 @@
                                         </div>
                                         <input type="button" value="B5" style="width: 100%"/>
                                         <input type="button" value="B6" style="width: 100%"/>
-                                        <input type="button" value="Subscribe" id="demodemo" style="width: 100%"/>
+                                        <input type="button" value="Check Routes" id="demodemo" style="width: 100%"/>
                                     </div>
                                 </div>
                             </div>{{-- End Form2--}}
                         </div>
                     </div>
                 </div>
-            </div>
-            {{--</div>--}}
-        </div>{{---------End class col-------------}}
-    </div>{{---------End PopUp2-------------}}
 
     <div class="div1">
 
