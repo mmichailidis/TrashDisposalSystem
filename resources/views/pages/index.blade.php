@@ -56,7 +56,7 @@
                                         <input type="text" name="limits" id="limits">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row click-me">
                                     </br>
                                     <input type="button" value="Subscribe" onclick="myFunction2()"/>
                                 </div>
@@ -80,10 +80,6 @@
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
-            </div>
-            {{----------------------}}
-            <div class="title">
-                <h1>subscribe</h1>
             </div>
             {{----------------------}}
 
@@ -141,20 +137,22 @@
 
                                 <div class="row">
                                     </br>
-
+                            <div class="ButStyle">
                                     <div class="b1class">
                                         <input type="button" value="B1" class="b1"
-                                               onclick="b1Callback()"/>
+                                               onclick="b1Callback()" style="width: 100%"/>
                                     </div>
                                     <div class="b2class">
                                         <input type="button" value="B2" class="b2"
-                                               onclick="b2Callback()"/>
+                                                onclick="b2Callback()" style="width: 100%"/>
                                     </div>
-                                    <input type="button" value="B3"/>
-                                    <input type="button" value="B4"/>
-                                    <input type="button" value="B5"/>
-                                    <input type="button" value="B6"/>
-                                    <input type="button" value="Subscribe" id="demodemo"/>
+
+                                    <input type="button" value="B3" style="width: 100%"/>
+                                    <input type="button" value="B4" style="width: 100%"/>
+                                    <input type="button" value="B5" style="width: 100%"/>
+                                    <input type="button" value="B6" style="width: 100%"/>
+                                    <input type="button" value="Subscribe" id="demodemo" style="width: 100%"/>
+                            </div>
                                 </div>
                             </div>{{-- End Form2--}}
                         </div>
@@ -356,3 +354,4 @@
 
 <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
 <link href="{{ asset('css/popup2.css') }}" rel="stylesheet">
+<link href="{{ asset('css/click-me.css') }}" rel="stylesheet">
