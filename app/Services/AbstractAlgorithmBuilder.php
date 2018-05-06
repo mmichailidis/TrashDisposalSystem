@@ -16,4 +16,5 @@ abstract class AbstractAlgorithmBuilder
     abstract function addTrack(Track $track);
     abstract function addVillage(VillageSchematics $village);
     abstract function lastNodeOneTimeOnlyStatus(bool $flag);
+    abstract function specificAreasOnly(bool $flag);
 }

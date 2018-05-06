@@ -20,18 +20,28 @@ class Algorithm
     private $villages = array();
     private $tracks = array();
     private $lastNodeOneTimeStatus;
+    private $specificAreasOnly;
+
     function addVillages(array $village)
     {
         $this->villages = $village;
     }
+
     function addTracks(array $track)
     {
         $this->tracks = $track;
     }
+
+    function specificAreasOnly(bool $specificAreasOnly)
+    {
+        $this->specificAreasOnly = $specificAreasOnly;
+    }
+
     function lastNodeOneTimeStatus(bool $lastNodeOneTimeStatus)
     {
         $this->lastNodeOneTimeStatus = $lastNodeOneTimeStatus;
     }
+
     function execute()
     {
         $this->calculator = new DistanceCalculator();
@@ -138,6 +148,7 @@ class Algorithm
             'path' => $strPath
         ];
     }
+
     public function getTargetedPath($from, $to, $fromPath = array(), $endFlag = false)
     {
         $vil = $this->locateVillage($to);
@@ -180,6 +191,7 @@ class Algorithm
         Log::info("About to solve");
         return $de->solve();
     }
+
     public function getTargetedPath2($from, $to, $fromPath = array(), $endFlag = false)
     {
         $unvisitedNodes = array();
@@ -219,6 +231,7 @@ class Algorithm
         $visit = [];
         dd("fill");
     }
+
     public function areAllSurroundingVisited(array $names): bool
     {
         foreach ($names as $name) {
@@ -229,6 +242,7 @@ class Algorithm
         }
         return true;
     }
+
     private function villagesNeeded()
     {
         $toReturn = array();
@@ -242,6 +256,7 @@ class Algorithm
         }
         return $toReturn;
     }
+
     private function wasTheRouteFulfilled(): bool
     {
         foreach ($this->villages as $village) {
@@ -251,6 +266,7 @@ class Algorithm
         }
         return true;
     }
+
     private function locateVillage(string $name): VillageSchematics
     {
         foreach ($this->villages as $village) {

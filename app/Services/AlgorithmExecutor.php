@@ -37,6 +37,10 @@ class AlgorithmExecutor
         $this->algorithmBuilder->lastNodeOneTimeOnlyStatus($flag);
     }
 
+    public function specificAreasOnly(bool $flag){
+        $this->algorithmBuilder->specificAreasOnly($flag);
+    }
+
     public function execute() {
         $algorithm = $this->algorithmBuilder->getAlgorithm();
 
