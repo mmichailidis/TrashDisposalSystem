@@ -46,7 +46,6 @@ class GeneralController extends Controller
                 if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village) {
                     unset($tmpCombinations[$key]);
                 }
-            $i++;
             }
 
         }
