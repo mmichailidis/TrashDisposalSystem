@@ -12,6 +12,11 @@ define('GOOGLE_DEST_URL', 'https://maps.googleapis.com/maps/api/distancematrix/j
 
 class DistanceCalculator
 {
+    public function ddd($lat_route, $lon_route, $des_lat, $des_lon){
+        $matrix[41.092083][23.541016][41.068238][23.390686]=10000;
+        return $matrix[$lat_route][$lon_route][$des_lat][$des_lon];
+    }
+
     public function calculateDistance($lat_route, $lon_route, $des_lat, $des_lon)
     {
         $distance = $this->setupUrl($lat_route, $lon_route, $des_lat, $des_lon);
