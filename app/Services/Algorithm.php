@@ -182,7 +182,6 @@ class Algorithm
             $node->addChild($village);
             $nodes[$village->getName()] = $node;
         }
-
         foreach ($nodes as $node) {
             $villageObj = $this->locateVillage($node->getName());
             foreach ($villageObj->getAvailableRoutes() as $route) {
