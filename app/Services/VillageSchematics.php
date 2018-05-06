@@ -76,6 +76,11 @@ class VillageSchematics
         return $this->name;
     }
 
+    public function setSize($var)
+    {
+        $this->size = $var;
+    }
+
     /**
      * @return mixed
      */

@@ -22,4 +22,6 @@ abstract class AbstractAlgorithmBuilder
     abstract function specificAreasOnly(bool $flag);
 
     abstract function specificAreasOnlyAndInclusive(bool $flag);
+
+    abstract function twoTracks(bool $flag);
 }

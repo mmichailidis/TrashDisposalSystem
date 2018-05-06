@@ -22,6 +22,7 @@ class Algorithm
     private $lastNodeOneTimeStatus;
     private $specificAreasOnly;
     private $specificAreasOnlyAndInclusive;
+    private $twoTracks;
 
     function addVillages(array $village)
     {
@@ -317,6 +318,16 @@ class Algorithm
         return $map[0];
     }
 
+    function twoTracks(bool $flag)
+    {
+        $this->twoTracks = $flag;
+    }
+
+    function executeForTwoTracks()
+    {
+
+    }
+
     function execute()
     {
         $this->calculator = new DistanceCalculator();
@@ -334,6 +345,10 @@ class Algorithm
         if ($this->specificAreasOnly) {
             Log::info("Execute for specific initializing");
             return $this->executeForSpecific();
+        }
+        if ($this->twoTracks) {
+            Log::info("Execute for specific initializing");
+            return $this->executeForTwoTracks();
         }
 
         $currentVillage = $start;

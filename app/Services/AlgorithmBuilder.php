@@ -17,6 +17,7 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
     private $lastNodeOneTimeStatus = false;
     private $specificAreasOnly = false;
     private $specificAreasOnlyAndInclusive = false;
+    private $twoTracks = false;
 
     public function __construct()
     {
@@ -48,6 +49,11 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
         $this->specificAreasOnlyAndInclusive = $flag;
     }
 
+    public function twoTracks(bool $flag)
+    {
+        $this->twoTracks = $flag;
+    }
+
     public function getAlgorithm(): Algorithm
     {
         foreach ($this->villages as $village) {
@@ -59,6 +65,7 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
         $this->algorithm->lastNodeOneTimeStatus($this->lastNodeOneTimeStatus);
         $this->algorithm->specificAreasOnly($this->specificAreasOnly);
         $this->algorithm->specificAreasOnlyAndInclusive($this->specificAreasOnlyAndInclusive);
+        $this->algorithm->twoTracks($this->twoTracks);
 
         return $this->algorithm;
     }

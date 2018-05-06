@@ -46,6 +46,11 @@ class AlgorithmExecutor
         $this->algorithmBuilder->specificAreasOnlyAndInclusive($flag);
     }
 
+    public function twoTracks(bool $flag)
+    {
+        $this->algorithmBuilder->twoTracks($flag);
+    }
+
     public function execute()
     {
         $algorithm = $this->algorithmBuilder->getAlgorithm();

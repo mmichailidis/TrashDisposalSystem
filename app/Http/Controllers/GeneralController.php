@@ -243,4 +243,25 @@ class GeneralController extends Controller
         return $algorithmExecutor->execute();
     }
 
+    public function questionB5()
+    {
+        $villagesArray = $this->dataFile;
+        $villages = array();
+        $decVil = json_decode($villagesArray);
+        $villages = array();
+        foreach ($decVil as $village) {
+            $villageSch = VillageSchematics::parse($village);
+            $villageSch->setSize(100);
+            array_push($villages, $villageSch);
+        }
+        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+            $algorithmExecutor->addVillage($vil);
+        });
+
+        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+        $algorithmExecutor->twoTracks(true);
+
+        return $algorithmExecutor->execute();
+    }
 }
