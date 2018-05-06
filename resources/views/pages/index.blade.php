@@ -3,168 +3,171 @@
 @section('content')
 
 
-                <h3 style="text-align:center;">Trash Disposal System</h3>
+    <h3 style="text-align:center;">Trash Disposal System</h3>
 
-            <div id="googleMap" style="width:100%;height:100%;"></div>
+    <div id="googleMap" style="width:100%;height:100%;"></div>
 
+    <input type="file" value="import" onclick="importFile()">
 
-            {{--Pop Up1 Menus--}}
-            <div class="col-sm-6">
-                <div class="container">
-                    <div class="button">
-                        <button><span>Click Me</span></button>
-                    </div>
+    {{--Pop Up1 Menus--}}
+    <div class="col-sm-6">
+        <div class="container">
+            <div class="button">
+                <button><span>Click Me</span></button>
+            </div>
 
-                    <div class="pop-up">
-                        <div class="content">
-                            <div class="container">
-                                <div class="dots">
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                </div>
-
-                                <span class="close">close</span>
-
-                                <div class="title">
-                                    <h1>subscribe</h1>
-                                </div>
-                                <div class="form">
-                                    <div id="form">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Locations:</label>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <label id="demo">--</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Buckets:</label>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <input type="text" name="buckets" id="buckets">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Limits of the road:</label>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <input type="text" name="limits" id="limits">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            </br>
-                                            <input type="button" value="Subscribe" onclick="myFunction2()"/>
-                                        </div>
-                                    </div>
-                                </div>{{---------End form-------------}}
-                            </div>{{---------End Conatiner-------------}}
-                        </div>{{---------End Content-------------}}
-                    </div> {{---------End PopUp1-------------}}
-                </div>{{-- conatiner--}}
-            </div> {{--End Col--}}
-            {{--End Popup Menus--}}
-
-
-
-
-            {{---------PopUp2-------------}}
-            <div class="pop-up2" hidden>
-                <div class="col-sm-6" id="ion">
-                    <div class="w3-container w3-center w3-animate-top">
+            <div class="pop-up">
+                <div class="content">
+                    <div class="container">
                         <div class="dots">
                             <div class="dot"></div>
                             <div class="dot"></div>
                             <div class="dot"></div>
                         </div>
-                        {{----------------------}}
+
+                        <span class="close">close</span>
+
                         <div class="title">
                             <h1>subscribe</h1>
                         </div>
-                        {{----------------------}}
-
-                        {{--------FORM2--------------}}
-<div class="formbox">
-                        <div class="w3-theme-l0">
-                            {{--<div style="min-width:400px">--}}
-                                    <div class="w3-panel w3-white w3-card w3-display-container">
-
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label id="Locations">Locations:</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label id="Loc">--</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label id="buck">Buckets:</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label id="Buck">--</label>
-                                                {{--<p id="demo666"></p>--}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label id="demo3">Limits of the road:</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label id="Limits">--</label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form2">
-                                            <div id="form2">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label>Vehicle:</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" name="Vehicle" id="Vehicle" size="4">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label>Capacity:</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" name="capacity" id="capacity" size="4">
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    </br>
-
-                                                    <div class="b1class">
-                                                        <input type="button" value="B1" class="b1"
-                                                               onclick="b1Callback()"/>
-
-                                                    </div>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B6"/>
-                                                    <input type="button" value="Subscribe" id="demodemo"/>
-                                                </div>
-                                            </div>{{-- End Form2--}}
-                                        </div>
+                        <div class="form">
+                            <div id="form">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Locations:</label>
                                     </div>
+                                    <div class="col-md-5">
+                                        <label id="demo">--</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Buckets:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="buckets" id="buckets">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Limits of the road:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="limits" id="limits">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    </br>
+                                    <input type="button" value="Subscribe" onclick="myFunction2()"/>
+                                </div>
+                            </div>
+                        </div>{{---------End form-------------}}
+                    </div>{{---------End Conatiner-------------}}
+                </div>{{---------End Content-------------}}
+            </div> {{---------End PopUp1-------------}}
+        </div>{{-- conatiner--}}
+    </div> {{--End Col--}}
+    {{--End Popup Menus--}}
+
+
+
+
+    {{---------PopUp2-------------}}
+    <div class="pop-up2" hidden>
+        {{--<div class="col-sm-6" id="ion">--}}
+        <div class="w3-container w3-center w3-animate-top">
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            {{----------------------}}
+            <div class="title">
+                <h1>subscribe</h1>
+            </div>
+            {{----------------------}}
+
+            {{--------FORM2--------------}}
+            <div class="formbox">
+                <div class="w3-theme-l3">
+                    {{--<div style="min-width:400px">--}}
+                    <div class="w3-panel w3-white w3-card w3-display-container">
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label id="Locations">Locations:</label>
+                            </div>
+                            <div class="col-md-5">
+                                <label id="Loc" title="Locations">--</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label id="buck">Buckets:</label>
+                            </div>
+                            <div class="col-md-5">
+                                <label id="Buck" title="Buckets">--</label>
+                                {{--<p id="demo666"></p>--}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label id="demo3" title="Limits of the road">Limits:</label>
+                            </div>
+                            <div class="col-md-5">
+                                <label id="Limits">--</label>
+                            </div>
+                        </div>
+
+
+                        <div class="form2">
+                            <div id="form2">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Vehicle:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="Vehicle" id="Vehicle" size="4">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label>Capacity:</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" name="capacity" id="capacity" size="4">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    </br>
+
+                                    <div class="b1class">
+                                        <input type="button" value="B1" class="b1"
+                                               onclick="b1Callback()"/>
+                                    </div>
+                                    <div class="b2class">
+                                        <input type="button" value="B2" class="b2"
+                                               onclick="b2Callback()"/>
+                                    </div>
+                                    <input type="button" value="B3"/>
+                                    <input type="button" value="B4"/>
+                                    <input type="button" value="B5"/>
+                                    <input type="button" value="B6"/>
+                                    <input type="button" value="Subscribe" id="demodemo"/>
+                                </div>
+                            </div>{{-- End Form2--}}
+                        </div>
                     </div>
-                </div>{{---------End class col-------------}}
-            </div>{{---------End PopUp2-------------}}
-
-            <div class="div1">
-
+                </div>
             </div>
+            {{--</div>--}}
+        </div>{{---------End class col-------------}}
+    </div>{{---------End PopUp2-------------}}
+
+    <div class="div1">
+
+    </div>
 
     <script>
         var locations = [
@@ -271,6 +274,24 @@
                 }
             });
         }
+
+        function b2Callback() {
+            $.ajax({
+                url: "http://localhost:8000/b2",
+                type: "POST",
+                success: function (data) {
+                    myMap(data.path)
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
+        }
+
+        function importFile() {
+
+        }
+
 
         function myFunction2() {
             $(".button").addClass('hidden');
