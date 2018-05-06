@@ -20,3 +20,4 @@ Route::post('/calculate', 'GeneralController@distanceCalculator');
 Route::post('/demo', 'GeneralController@demo');
 Route::post('/b2', 'GeneralController@questionB2');
 Route::post('/b3', 'GeneralController@questionB3');
+Route::post('/b4', 'GeneralController@questionB4');
