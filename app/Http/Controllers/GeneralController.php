@@ -128,39 +128,68 @@ class GeneralController extends Controller
     public function demo(Request $request)
     {
         $parseFile = file_get_contents('files/b1.txt');
-        $villagesArray = $parseFile;
-        $villages = array();
-        $decVil = json_decode($villagesArray);
-        foreach ($decVil as $village) {
-            $villageSch = VillageSchematics::parse($village);
-            array_push($villages, $villageSch);
+        $results = [];
+        for ($i = 0; $i < 15; $i++) {
+            $villagesArray = $parseFile;
+            $villages = array();
+            $decVil = json_decode($villagesArray);
+            foreach ($decVil as $village) {
+                $villageSch = VillageSchematics::parse($village);
+                array_push($villages, $villageSch);
+            }
+            $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+
+            collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+                $algorithmExecutor->addVillage($vil);
+            });
+            array_push($results, $algorithmExecutor->execute());
         }
-        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
-        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
-            $algorithmExecutor->addVillage($vil);
+
+        $minDistance = collect($results)->min(function ($v) {
+            return $v['distance'];
         });
-        return $algorithmExecutor->execute('no data');
+
+        return $this->locateItem($results, $minDistance);
     }
 
     public function questionB2()
     {
         $parseFile = file_get_contents('files/b1.txt');
-        $villagesArray = $parseFile;
-        $villages = array();
-        $decVil = json_decode($villagesArray);
-        $villages = array();
-        foreach ($decVil as $village) {
-            $villageSch = VillageSchematics::parse($village);
-            array_push($villages, $villageSch);
+        $results = [];
+        for ($i = 0; $i < 15; $i++) {
+            $villagesArray = $parseFile;
+            $villages = array();
+            $decVil = json_decode($villagesArray);
+            $villages = array();
+            foreach ($decVil as $village) {
+                $villageSch = VillageSchematics::parse($village);
+                array_push($villages, $villageSch);
+            }
+            $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+            collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+                $algorithmExecutor->addVillage($vil);
+            });
+
+            $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+            array_push($results, $algorithmExecutor->execute());
         }
-        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
-        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
-            $algorithmExecutor->addVillage($vil);
+
+        $minDistance = collect($results)->min(function ($v) {
+            return $v['distance'];
         });
 
-        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+        return $this->locateItem($results, $minDistance);
+    }
 
-        return $algorithmExecutor->execute();
+    function locateItem($map, $value)
+    {
+        foreach ($map as $item)
+            if ($item['distance'] === $value)
+                return $item;
+
+        echo "error";
+        Log::info("error on locate item");
+        return $map[0];
     }
 
     public function questionB3()
