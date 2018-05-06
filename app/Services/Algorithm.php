@@ -174,7 +174,7 @@ class Algorithm
 
         foreach ($this->villages as $village) {
             $node = new Node($village->getName());
-            if ($village->getType() === "end" && $skipEnd && $this->lastNodeOneTimeStatus) {
+            if ($village->getType() === "end" && $this->lastNodeOneTimeStatus && $skipEnd) {
                 Log::info("Skipping ending point(1)");
                 continue;
             }
@@ -274,9 +274,13 @@ class Algorithm
         $toReturn = array();
         foreach ($this->villages as $village) {
             if (!$village->isVisited()) {
+                if ($village->getType() === "end" && $this->lastNodeOneTimeStatus) {
+                    continue;
+                }
                 array_push($toReturn, $village);
             }
         }
+
         return $toReturn;
     }
 
