@@ -21,6 +21,7 @@ class Algorithm
     private $tracks = array();
     private $lastNodeOneTimeStatus;
     private $specificAreasOnly;
+    private $specificAreasOnlyAndInclusive;
 
     function addVillages(array $village)
     {
@@ -42,8 +43,22 @@ class Algorithm
         $this->lastNodeOneTimeStatus = $lastNodeOneTimeStatus;
     }
 
+    function specificAreasOnlyAndInclusive(bool $specificAreasOnlyAndInclusive)
+    {
+        $this->specificAreasOnlyAndInclusive = $specificAreasOnlyAndInclusive;
+    }
+
+    function executeForSpecificAndAdditive()
+    {
+
+    }
+
     function executeForSpecific()
     {
+        if ($this->specificAreasOnlyAndInclusive) {
+            return $this->executeForSpecificAndAdditive();
+        }
+
         $specificAreas = [
             'Koumaria',
             'Skoutari',
@@ -157,7 +172,7 @@ class Algorithm
             }
         }
         foreach ($toMerge as $part) {
-            $pathToReturn = $pathToReturn . $part;
+            $pathToReturn = $pathToReturn . ":" . $part;
         }
 
         return ['path' => $pathToReturn, 'distance' => $distanceToReturn];

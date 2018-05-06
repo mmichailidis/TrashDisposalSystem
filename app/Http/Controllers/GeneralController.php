@@ -185,4 +185,27 @@ class GeneralController extends Controller
         return $algorithmExecutor->execute();
     }
 
+    public function questionB4()
+    {
+        $parseFile = file_get_contents('files/b1.txt');
+        $villagesArray = $parseFile;
+        $villages = array();
+        $decVil = json_decode($villagesArray);
+        $villages = array();
+        foreach ($decVil as $village) {
+            $villageSch = VillageSchematics::parse($village);
+            array_push($villages, $villageSch);
+        }
+        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+            $algorithmExecutor->addVillage($vil);
+        });
+
+        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+        $algorithmExecutor->specificAreasOnly(true);
+        $algorithmExecutor->specificAreasOnlyAndInclusive(true);
+
+        return $algorithmExecutor->execute();
+    }
+
 }

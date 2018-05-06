@@ -9,8 +9,6 @@
 
 namespace App\Services;
 
-use App\Village;
-
 class AlgorithmExecutor
 {
     /**
@@ -33,15 +31,23 @@ class AlgorithmExecutor
         $this->algorithmBuilder->addTrack($track);
     }
 
-    public function lastNodeOneTimeOnlyStatus(bool $flag) {
+    public function lastNodeOneTimeOnlyStatus(bool $flag)
+    {
         $this->algorithmBuilder->lastNodeOneTimeOnlyStatus($flag);
     }
 
-    public function specificAreasOnly(bool $flag){
+    public function specificAreasOnly(bool $flag)
+    {
         $this->algorithmBuilder->specificAreasOnly($flag);
     }
 
-    public function execute() {
+    public function specificAreasOnlyAndInclusive(bool $flag)
+    {
+        $this->algorithmBuilder->specificAreasOnlyAndInclusive($flag);
+    }
+
+    public function execute()
+    {
         $algorithm = $this->algorithmBuilder->getAlgorithm();
 
         return $algorithm->execute();
