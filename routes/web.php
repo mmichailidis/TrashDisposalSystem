@@ -18,4 +18,3 @@ Route::get('/', 'GeneralController@index');
 Route::post('/calculate', 'GeneralController@distanceCalculator');
 
 Route::post('/demo', 'GeneralController@demo');
-Route::post('/b2', 'GeneralController@questionB2');

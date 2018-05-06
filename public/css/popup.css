@@ -214,6 +214,7 @@
     -o-animation: float 6s ease-in-out infinite;
     animation: float 6s ease-in-out infinite;
 }
+
 @media (min-width: 768px) {
     .pop-up .content .dots .dot:nth-of-type(1) {
         top: -220px;
@@ -359,3 +360,39 @@
     -o-transform: translateX(0px);
     transform: translateX(0px);
 }
+
+
+/*.wannabepopup .content .dots .dot:nth-of-type(1) {*/
+    /*top: -80px;*/
+    /*right: -80px;*/
+    /*width: 160px;*/
+    /*height: 160px;*/
+    /*background-color: #166905;*/
+    /*-webkit-animation: float 6s ease-in-out infinite;*/
+    /*-moz-animation: float 6s ease-in-out infinite;*/
+    /*-o-animation: float 6s ease-in-out infinite;*/
+    /*animation: float 6s ease-in-out infinite;*/
+/*}*/
+
+/*.wannabepopup .content .dots .dot:nth-of-type(2) {*/
+    /*bottom: -135px;*/
+    /*left: -135px;*/
+    /*width: 240px;*/
+    /*height: 240px;*/
+    /*background-color: #438C34;*/
+    /*-webkit-animation: float 8s ease-in-out infinite;*/
+    /*-moz-animation: float 8s ease-in-out infinite;*/
+    /*-o-animation: float 8s ease-in-out infinite;*/
+    /*animation: float 8s ease-in-out infinite;*/
+/*}*/
+/*.wannabepopup .content .dots .dot:nth-of-type(3) {*/
+    /*bottom: -40px;*/
+    /*right: -40px;*/
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*background-color: #225418;*/
+    /*-webkit-animation: float 4s ease-in-out infinite;*/
+    /*-moz-animation: float 4s ease-in-out infinite;*/
+    /*-o-animation: float 4s ease-in-out infinite;*/
+    /*animation: float 4s ease-in-out infinite;*/
+/*}*/

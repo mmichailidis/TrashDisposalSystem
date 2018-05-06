@@ -147,8 +147,9 @@
 
                                                 <div class="row">
                                                     </br>
-                                                    <div class="asda">
-                                                        <input type="button" value="B1" class="b1"/>
+                                                    <div class="b1class">
+                                                        <input type="button" value="B1" class="b1"
+                                                               onclick="b1Callback()"/>
                                                     </div>
                                                     <input type="button" value="B2"/>
                                                     <input type="button" value="B2"/>
@@ -181,7 +182,7 @@
         ];
         var aa = '';
 
-        function myMap() {
+        function myMap(jsonData = null) {
             var Serres = new google.maps.LatLng(41.092083, 23.541016);
             var mapCanvas = document.getElementById("googleMap");
             var mapOptions = {center: Serres, zoom: 11};
@@ -208,27 +209,11 @@
                     }
                 })(marker2, i));
 
-                arrowDrawer();
+                arrowDrawer(jsonData);
             }
 
-            $(".b1").click(function () {
-                $.ajax({
-                    url: "http://localhost:8000/demo",
-                    type: "POST",
-                    data: "",
-                    dataType: "application/json",
-                    success: function (result) {
-                        var distance = result.distance;
-                        var paths = result.path;
-                        console.log(paths);
-                        arrowDrawer(paths)
-                    }
-                });
-            });
-
-            function arrowDrawer(jsonData = null) {
+            function arrowDrawer(jsonData) {
                 var destination = [];
-                console.log('json: ' + jsonData);
                 var coordinates = new Array();
                 if (jsonData === null) {
                     @foreach($villageConn as $con)
@@ -236,13 +221,26 @@
                         new google.maps.LatLng({{$con->route_coord[0]->latitude}}, {{$con->route_coord[0]->longitude}}),
                         new google.maps.LatLng({{$con->dest_coord[0]->latitude}}, {{$con->dest_coord[0]->longitude}})
                     ]);
-                    console.log(destination);
 
                     @endforeach
                 } else {
-                    console.log(jsonData);
+                    var myData = jsonData;
+                    var explodeData = myData.split(":");
+                    for (var ar = 1, maxAr = explodeData.length; ar < maxAr; ar++) {
+                        var line = explodeData[ar].trim().substr(1, explodeData[ar].length - 2);
+                        var previousLine = explodeData[ar - 1].trim().substr(1, explodeData[ar - 1].length - 2);
+
+                        var lastExpl = line.split(',');
+                        var previousLastExpl = previousLine.split(',');
+                        destination.push([
+                            new google.maps.LatLng(lastExpl[1], lastExpl[2]),
+                            new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2])
+                        ]);
+                    }
+
+                    console.log(destination);
+
                 }
-                console.log(coordinates);
 
                 for (var a = 0, max = destination.length; a < max; a++) {
                     var coordinates = [];
@@ -267,9 +265,20 @@
                     polyline.setMap(map);
                 }
             }
-
         }
 
+        function b1Callback() {
+            $.ajax({
+                url: "http://localhost:8000/demo",
+                type: "POST",
+                success: function (data) {
+                    myMap(data.path)
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
+        }
 
         function myFunction2() {
             $(".button").addClass('hidden');

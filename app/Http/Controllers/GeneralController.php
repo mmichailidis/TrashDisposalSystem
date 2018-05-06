@@ -10,7 +10,6 @@ use App\Village;
 use App\VillageConnection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 
 class GeneralController extends Controller
@@ -24,11 +23,12 @@ class GeneralController extends Controller
 
     public function index()
     {
-        $village = Village::all();
+        $village  = Village::all();
         $combinations = VillageConnection::all();
         $tmpCombinations = $combinations->toArray();
+
         $villageConn = [];
-        $i = 1;
+        $i=1;
         foreach ($combinations as $combination) {
             $needle = [
                 "id" => $i,
@@ -46,19 +46,21 @@ class GeneralController extends Controller
                 if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village) {
                     unset($tmpCombinations[$key]);
                 }
+            $i++;
             }
 
         }
+
         foreach ($villageConn as $key => $value) {
             $route = DB::select(DB::raw(
-                'SELECT latitude, longitude FROM villages WHERE id = ' . $value->route_village
+                'SELECT latitude, longitude FROM villages WHERE id = '.$value->route_village
             ));
 
             $dest = DB::select(DB::raw(
-                'SELECT latitude, longitude FROM villages WHERE id = ' . $value->connected_village
+                'SELECT latitude, longitude FROM villages WHERE id = '.$value->connected_village
             ));
 
-            $villageConn[$key]['route_coord'] = $route;
+            $villageConn[$key]['route_coord'] =  $route;
             $villageConn[$key]['dest_coord'] = $dest;
         }
 
@@ -85,7 +87,7 @@ class GeneralController extends Controller
                     'dest' => $combination->route
                 ];
 
-                if (array_search($revert, $combinationArr) === false) {
+                if(array_search($revert, $combinationArr) === false)  {
                     $combinationArr[] = $combination;
                 }
 
@@ -126,13 +128,10 @@ class GeneralController extends Controller
 
     public function demo(Request $request)
     {
-        $parseFile = file_get_contents('files/b1.txt');
-
-        $villagesArray = $parseFile;
+        $villagesArray = $request['Villages'];
         $villages = array();
-        $decVil = json_decode($villagesArray);
 
-        foreach ($decVil as $village) {
+        foreach ($villagesArray as $village) {
             $villageSch = VillageSchematics::parse($village);
             array_push($villages, $villageSch);
         }
@@ -144,32 +143,6 @@ class GeneralController extends Controller
         });
 
         return $algorithmExecutor->execute('no data');
-    }
-
-    public function questionB2()
-    {
-        $parseFile = file_get_contents('files/b1.txt');
-
-        $villagesArray = $parseFile;
-        $villages = array();
-        $decVil = json_decode($villagesArray);
-
-        $villages = array();
-
-        foreach ($decVil as $village) {
-            $villageSch = VillageSchematics::parse($village);
-            array_push($villages, $villageSch);
-        }
-
-        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
-
-        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
-            $algorithmExecutor->addVillage($vil);
-        });
-
-        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
-
-        return $algorithmExecutor->execute();
     }
 
 }
