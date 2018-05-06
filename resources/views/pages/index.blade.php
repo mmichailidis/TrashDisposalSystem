@@ -255,7 +255,7 @@
                                 </div>
                             </div>
                         </div>{{-- Content--}}
-                    </div>{{-- PopUp2--}}
+                    </div>{{-- pop-up2--}}
                 </div>{{-- conatiner--}}
             </div>{{--End Popup Menus--}}
         </div>
