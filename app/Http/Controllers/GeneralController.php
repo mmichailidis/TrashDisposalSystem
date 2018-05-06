@@ -35,7 +35,7 @@ class GeneralController extends Controller
                 "route_village" => $combination->route_village,
                 "connected_village" => $combination->connected_village
             ];
-            $i++;
+            $i++;//maybe
             array_unshift($tmpCombinations, [0, 0, 0]);
             if (array_search($needle, $tmpCombinations)) {
                 $villageConn[] = $combination;
