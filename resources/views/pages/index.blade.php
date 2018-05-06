@@ -249,6 +249,12 @@
 
                                         <div class="row">
                                             </br>
+                                            <input type="button" value="B1"/>
+                                            <input type="button" value="B2" />
+                                            <input type="button" value="B2" />
+                                            <input type="button" value="B2" />
+                                            <input type="button" value="B2" />
+                                            <input type="button" value="B6" />
                                             <input type="button" value="Subscribe" id="demodemo"/>
                                         </div>
                                     </div>
