@@ -92,9 +92,9 @@
     /*z-index: 2;*/
 }
 .button button {
-    position: relative;
-    top: 50%;
-    left: 50%;
+    position: absolute;
+    top: -650px;
+    right: -20px;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -134,9 +134,9 @@
 }
 
 .pop-up {
-    position: relative;
-    top: 50%;
-    left: 50%;
+    position: absolute;
+    top: 20px;
+    right: -750px;
     -webkit-transform: translate(-50%, -50%) scale(0.9);
     -moz-transform: translate(-50%, -50%) scale(0.9);
     -ms-transform: translate(-50%, -50%) scale(0.9);
