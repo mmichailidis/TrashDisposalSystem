@@ -8,20 +8,26 @@
 
 namespace App\Services;
 
-define('GOOGLE_DEST_URL', 'http://maps.googleapis.com/maps/api/distancematrix/json?');
+define('GOOGLE_DEST_URL', 'https://maps.googleapis.com/maps/api/distancematrix/json?');
 
 class DistanceCalculator
 {
-    public function calculateDistance($lat_route, $lon_route, $des_lat, $des_lon) {
+    public function calculateDistance($lat_route, $lon_route, $des_lat, $des_lon)
+    {
         $distance = $this->setupUrl($lat_route, $lon_route, $des_lat, $des_lon);
         $distanceDec = json_decode($distance);
+
+        if ($distanceDec->status != "OK") {
+            dd($distance);
+        }
 
         $result = $this->formatResult($distanceDec->rows);
 
         return $result;
     }
 
-    private function curlGoogleDistanceApi($url) {
+    private function curlGoogleDistanceApi($url)
+    {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -32,15 +38,16 @@ class DistanceCalculator
         return $result;
     }
 
-    private function setupUrl($lat_route, $lon_route, $des_lat, $des_lon) {
-        $url = GOOGLE_DEST_URL."origins=$lat_route,$lon_route&destinations=$des_lat,$des_lon";
+    private function setupUrl($lat_route, $lon_route, $des_lat, $des_lon)
+    {
+        $url = GOOGLE_DEST_URL . "origins=$lat_route,$lon_route&destinations=$des_lat,$des_lon&key=AIzaSyDFb1m9lj3C-eBveJPpcR5YO1LcAWI53mE";
 
         $result = $this->curlGoogleDistanceApi($url);
-
         return $result;
     }
 
-    private function formatResult($distance) {
+    private function formatResult($distance)
+    {
         $parseDist = $distance[0]->elements[0]->distance;
 
         $distArr = [
