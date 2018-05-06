@@ -323,9 +323,109 @@ class Algorithm
         $this->twoTracks = $flag;
     }
 
+    function findNearFullCans($area)
+    {
+        $toReturn = [];
+
+        foreach ($area->getAvailableRoutes() as $route) {
+            $vil = $this->locateVillage($route);
+            if ($vil->getSize() > 0) {
+                array_push($toReturn, $vil);
+            }
+        }
+
+        return $toReturn;
+    }
+
     function executeForTwoTracks()
     {
+        $this->calculator = new DistanceCalculator();
+        $start = null;
+        $end = null;
+        $maxIterations = 15;
+        $decidedPath = [];
 
+        foreach ($this->villages as $village) {
+            if ($village->getType() == "start") {
+                $start = $village;
+                $start->setSize(0);
+                $start->setVisitedTrue();
+            } else if ($village->getType() == "end") {
+                $end = $village;
+                $end->setSize(0);
+            }
+        }
+
+        $innerVillages = [];
+        foreach ($this->villages as $area) {
+            $vil = $this->locateVillage($area->getName());
+            $innerVillages[$vil->getName()] = $vil;
+        }
+
+        for ($track = 0; $track < 2; $track++) {
+            $exitFlag = true;
+            $current = $start;
+            $size = 0;
+            array_push($decidedPath, "=======");
+            do {
+                array_push($decidedPath, $current->getName());
+                $nearLocations = $this->findNearFullCans($current);
+                $found = [];
+                if (empty($nearLocations)) {
+                    $all = $current->getAvailableRoutes();
+                    $path = rand(0, count($all) - 1);
+                    $current = $this->locateVillage($path);
+                    continue;
+                }
+
+                foreach ($nearLocations as $key => $location) {
+                    $val = $this->calculator->calculateDistance($current->getLat(), $current->getLon(),
+                        $location->getLat(), $location->getLon())['meters_distance'];
+                    $found[$key] = $val;
+                }
+
+                $min = $found[0];
+                $key = 0;
+                for ($i = 1; $i < count($found); $i++) {
+                    if ($min >= $found[$i]) {
+                        $min = $found[$i];
+                        $key = $i;
+                    }
+                }
+
+                $current = $nearLocations[$key];
+                $current->setSize(0);
+                $size += 100;
+                if ($size === 400) {
+                    $this->getTargetedPath($current->getName(), $end->getName());
+                    $exitFlag = false;
+                }
+
+            } while ($exitFlag);
+        }
+        dd("hello", $decidedPath);
+        $pathToReturn = "";
+        $distanceToReturn = 0;
+        $toMerge = [];
+        foreach ($decidedPath as $path) {
+            $distanceToReturn += $path['distance'];
+            $splitted = explode(":", substr($path['path'], 0, strlen($path['path']) - 1));
+
+            foreach ($splitted as $slice) {
+                if (empty($toMerge)) {
+                    array_push($toMerge, $slice);
+                    continue;
+                }
+                if ($toMerge[count($toMerge) - 1] != $slice) {
+                    array_push($toMerge, $slice);
+                }
+            }
+        }
+        foreach ($toMerge as $part) {
+            $pathToReturn = $pathToReturn . ":" . $part;
+        }
+
+        return ['path' => $pathToReturn, 'distance' => $distanceToReturn];
     }
 
     function execute()
@@ -486,46 +586,6 @@ class Algorithm
         $de->setEndingNode($nodes[$to]);
         Log::info("About to solve");
         return $de->solve();
-    }
-
-    public function getTargetedPath2($from, $to, $fromPath = array(), $endFlag = false)
-    {
-        $unvisitedNodes = array();
-        $unvisitedNodes = collect($this->villages)->flatMap(function ($item, $key) {
-            return [$item->getName() => $item];
-        })->toArray();
-//        foreach ($this->villages as $village) {
-//            $unvisitedNodes[$village->getName()] = $village;
-////            array_push($unvisitedNodes, $village, $village->getName());
-//        }
-        $nodes = array_keys($unvisitedNodes);
-        $startNode = $unvisitedNodes[$from->getName()];
-        $currentNode = $startNode;
-        $paths = [];
-        for (; ;) {
-            $myLat = $currentNode->getLat();
-            $myLon = $currentNode->getLon();
-            foreach ($currentNode->getAvailableRoutes() as $availableRoute) {
-                $villageObj = null;
-                foreach ($this->villages as $village) {
-                    if ($village->getName() === $availableRoute) {
-                        $villageObj = $village;
-                    }
-                }
-                if (is_null($villageObj)) {
-                    throw new \InvalidArgumentException();
-                }
-                $distance = $this->calculator->calculateDistance($myLat, $myLon,
-                    $villageObj->getLat(), $villageObj->getLon());
-                dd($distance);
-            }
-            dd($currentNode);
-        }
-        $totalMap = [];
-        $distance = [];
-        $parent = [];
-        $visit = [];
-        dd("fill");
     }
 
     public function areAllSurroundingVisited(array $names): bool

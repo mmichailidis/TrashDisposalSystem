@@ -151,7 +151,13 @@ class GeneralController extends Controller
             collect($villages)->each(function ($vil) use ($algorithmExecutor) {
                 $algorithmExecutor->addVillage($vil);
             });
-            array_push($results, $algorithmExecutor->execute());
+            $val = $algorithmExecutor->execute();
+            $toTest = explode(":", $val['path']);
+            
+            if (!str_contains($toTest[count($toTest) - 2], 'Adelfiko'))
+                continue;
+
+            array_push($results, $val);
         }
 
         $minDistance = collect($results)->min(function ($v) {
