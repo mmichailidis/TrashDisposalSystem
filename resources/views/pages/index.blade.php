@@ -5,8 +5,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h3>My Google Maps Demo</h3>
-                <div id="googleMap" style="width:100%;height:400px;"></div>
+                <h3>Trash Disposal System</h3>
+                <div id="googleMap" style="width:100%;height:85%;"></div>
 
                 <script>
                     var locations = [

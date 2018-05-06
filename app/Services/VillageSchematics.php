@@ -24,11 +24,13 @@ class VillageSchematics
     private $availableRoutes;
     private $isVisited;
     private $type;
+    private $isLookingFor;
 
     private function __construct()
     {
         $this->isVisited = false;
         $this->availableRoutes = array();
+        $this->isLookingFor = true;
     }
 
     /**
@@ -134,13 +136,35 @@ class VillageSchematics
     {
         $this->isVisited = true;
     }
-
-    public function demandSolution()
+    public function setVisitedFalse()
     {
-        echo $this->getName();
+        $this->isVisited = false;
     }
 
+    public function getAvailableRoutes(){
+        return $this->availableRoutes;
+    }
 
+    /**
+     * @return bool
+     */
+    public function isLookingFor(): bool
+    {
+        return $this->isLookingFor;
+    }
+
+    /**
+     * @param bool $isLookingFor
+     */
+    public function setIsLookingFor(bool $isLookingFor): void
+    {
+        $this->isLookingFor = $isLookingFor;
+    }
+
+    public function removeRoute($route){
+        $key = array_search($route,$this->availableRoutes);
+        unset($this->availableRoutes[$key]);
+    }
 //    public function getShortestPath(): AvailableRoute
 //    {
 //        $available = array();
