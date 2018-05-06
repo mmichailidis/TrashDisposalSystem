@@ -71,25 +71,25 @@
 
 
 
-            {{---------PopUp2-------------}}
-            <div class="pop-up2" hidden>
-                <div class="col-sm-6" id="ion">
-                    <div class="w3-container w3-center w3-animate-top">
-                        <div class="dots">
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                        </div>
-                        {{----------------------}}
-                        <div class="title">
-                            <h1>subscribe</h1>
-                        </div>
-                        {{----------------------}}
+                {{---------PopUp2-------------}}
+                <div class="pop-up2" hidden>
+                    {{--<div class="col-sm-6" id="ion">--}}
+                        <div class="w3-container w3-center w3-animate-top">
+                            <div class="dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            {{----------------------}}
+                            <div class="title">
+                                <h1>subscribe</h1>
+                            </div>
+                            {{----------------------}}
 
-                        {{--------FORM2--------------}}
-<div class="formbox">
-                        <div class="w3-theme-l0">
-                            {{--<div style="min-width:400px">--}}
+                            {{--------FORM2--------------}}
+                            <div class="formbox">
+                                <div class="w3-theme-l0">
+                                    {{--<div style="min-width:400px">--}}
                                     <div class="w3-panel w3-white w3-card w3-display-container">
 
                                         <div class="row">
@@ -97,7 +97,7 @@
                                                 <label id="Locations">Locations:</label>
                                             </div>
                                             <div class="col-md-3">
-                                                <label id="Loc">--</label>
+                                                <label id="Loc" title="Locations">--</label>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -105,13 +105,13 @@
                                                 <label id="buck">Buckets:</label>
                                             </div>
                                             <div class="col-md-3">
-                                                <label id="Buck">--</label>
+                                                <label id="Buck" title="Buckets">--</label>
                                                 {{--<p id="demo666"></p>--}}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <label id="demo3">Limits of the road:</label>
+                                                <label id="demo3" title="Limits of the road">Limits:</label>
                                             </div>
                                             <div class="col-md-3">
                                                 <label id="Limits">--</label>
@@ -158,11 +158,11 @@
                                             </div>{{-- End Form2--}}
                                         </div>
                                     </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>{{---------End class col-------------}}
-            </div>{{---------End PopUp2-------------}}
+                        {{--</div>--}}
+                    </div>{{---------End class col-------------}}
+                </div>{{---------End PopUp2-------------}}
 
             <div class="div1">
 
@@ -179,7 +179,7 @@
         function myMap(jsonData = null) {
             var Serres = new google.maps.LatLng(41.092083, 23.541016);
             var mapCanvas = document.getElementById("googleMap");
-            var mapOptions = {center: Serres, zoom: 11};
+            var mapOptions = {center: Serres, zoom: 12};
             var map = new google.maps.Map(mapCanvas, mapOptions);
             var marker = new google.maps.Marker({
                 position: Serres,
