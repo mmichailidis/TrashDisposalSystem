@@ -225,8 +225,8 @@
                         var lastExpl = line.split(',');
                         var previousLastExpl = previousLine.split(',');
                         destination.push([
-                            new google.maps.LatLng(lastExpl[1], lastExpl[2]),
-                            new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2])
+                            new google.maps.LatLng(previousLastExpl[1], previousLastExpl[2]),
+                            new google.maps.LatLng(lastExpl[1], lastExpl[2])
                         ]);
                     }
 
