@@ -88,32 +88,32 @@
 
                             {{--------FORM2--------------}}
                             <div class="formbox">
-                                <div class="w3-theme-l0">
+                                <div class="w3-theme-l3">
                                     {{--<div style="min-width:400px">--}}
                                     <div class="w3-panel w3-white w3-card w3-display-container">
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="Locations">Locations:</label>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="Loc" title="Locations">--</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="buck">Buckets:</label>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="Buck" title="Buckets">--</label>
                                                 {{--<p id="demo666"></p>--}}
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="demo3" title="Limits of the road">Limits:</label>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label id="Limits">--</label>
                                             </div>
                                         </div>
@@ -122,18 +122,18 @@
                                         <div class="form2">
                                             <div id="form2">
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <label>Vehicle:</label>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <input type="text" name="Vehicle" id="Vehicle" size="4">
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <label>Capacity:</label>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <input type="text" name="capacity" id="capacity" size="4">
                                                     </div>
                                                 </div>
