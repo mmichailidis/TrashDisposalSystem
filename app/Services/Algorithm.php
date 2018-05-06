@@ -81,6 +81,7 @@ class Algorithm
             $vil = $this->locateVillage($area);
             $innerVillages[$vil->getName()] = $vil;
         }
+        $removeCount = 0;
 
         $exitFlag = true;
         $current = $start;
@@ -117,6 +118,13 @@ class Algorithm
 
             $willGoThisWay = $this->locateItem($decisions, $val);
             unset($innerVillages[$willGoThisWay["object"]->getName()]);
+            $removeCount++;
+            if ($removeCount === 2) {
+                foreach ($extraAreas as $area) {
+                    $vil = $this->locateVillage($area);
+                    $innerVillages[$vil->getName()] = $vil;
+                }
+            }
             array_push($decidedPath, ["path" => $willGoThisWay['path'], "distance" => $willGoThisWay['distance']]);
             $current = $willGoThisWay['object'];
             if (empty($innerVillages)) {
@@ -167,10 +175,10 @@ class Algorithm
             }
         }
         foreach ($toMerge as $part) {
-            $pathToReturn = $pathToReturn . $part . ":";
+            $pathToReturn = $pathToReturn . ":" . $part;
         }
 
-        return json_encode(['path' => $pathToReturn, 'distance' => $distanceToReturn]);
+        return ['path' => $pathToReturn, 'distance' => $distanceToReturn];
     }
 
     function executeForSpecific()
