@@ -144,12 +144,14 @@
                                                     <div class="b1class">
                                                         <input type="button" value="B1" class="b1"
                                                                onclick="b1Callback()"/>
-
                                                     </div>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
-                                                    <input type="button" value="B2"/>
+                                                    <div class="b2class">
+                                                        <input type="button" value="B2" class="b2"
+                                                               onclick="b2Callback()"/>
+                                                    </div>
+                                                    <input type="button" value="B3"/>
+                                                    <input type="button" value="B4"/>
+                                                    <input type="button" value="B5"/>
                                                     <input type="button" value="B6"/>
                                                     <input type="button" value="Subscribe" id="demodemo"/>
                                                 </div>
@@ -262,6 +264,19 @@
         function b1Callback() {
             $.ajax({
                 url: "http://localhost:8000/demo",
+                type: "POST",
+                success: function (data) {
+                    myMap(data.path)
+                },
+                error: function (req, status, err) {
+                    console.log('something went wrong', status, err);
+                }
+            });
+        }
+
+        function b2Callback() {
+            $.ajax({
+                url: "http://localhost:8000/b2",
                 type: "POST",
                 success: function (data) {
                     myMap(data.path)
