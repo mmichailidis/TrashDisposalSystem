@@ -127,21 +127,40 @@ class GeneralController extends Controller
 
     public function demo(Request $request)
     {
-        $villagesArray = $request['Villages'];
+        $parseFile = file_get_contents('files/b1.txt');
+        $villagesArray = $parseFile;
         $villages = array();
-
-        foreach ($villagesArray as $village) {
+        $decVil = json_decode($villagesArray);
+        foreach ($decVil as $village) {
             $villageSch = VillageSchematics::parse($village);
             array_push($villages, $villageSch);
         }
-
         $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+            $algorithmExecutor->addVillage($vil);
+        });
+        return $algorithmExecutor->execute('no data');
+    }
 
+    public function questionB2()
+    {
+        $parseFile = file_get_contents('files/b1.txt');
+        $villagesArray = $parseFile;
+        $villages = array();
+        $decVil = json_decode($villagesArray);
+        $villages = array();
+        foreach ($decVil as $village) {
+            $villageSch = VillageSchematics::parse($village);
+            array_push($villages, $villageSch);
+        }
+        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
         collect($villages)->each(function ($vil) use ($algorithmExecutor) {
             $algorithmExecutor->addVillage($vil);
         });
 
-        return $algorithmExecutor->execute('no data');
+        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+
+        return $algorithmExecutor->execute();
     }
 
 }

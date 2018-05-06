@@ -33,9 +33,13 @@ class AlgorithmExecutor
         $this->algorithmBuilder->addTrack($track);
     }
 
-    public function execute($data) {
+    public function lastNodeOneTimeOnlyStatus(bool $flag) {
+        $this->algorithmBuilder->lastNodeOneTimeOnlyStatus($flag);
+    }
+
+    public function execute() {
         $algorithm = $this->algorithmBuilder->getAlgorithm();
 
-        return $algorithm->execute($data);
+        return $algorithm->execute();
     }
 }

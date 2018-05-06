@@ -42,10 +42,10 @@ class VillageSchematics
     {
         $vS = new VillageSchematics();
 
-        $vS->name = $json['name'];
-        $vS->bin = $json['bin'];
-        $vS->size = $json['capacity'];
-        $vS->onlyOnce = $json['OTO'];
+        $vS->name = $json->name;
+        $vS->bin = $json->bin;
+        $vS->size = $json->capacity;
+        $vS->onlyOnce = $json->OTO;
 
         $village = Village::where(["name" => $vS->name])->first();
         $vS->id = $village->id;
@@ -58,8 +58,8 @@ class VillageSchematics
 
     function setRoutes()
     {
-        $con = DB::select(DB::raw('SELECT vill.name as destination FROM TrashDisposalSystem.connections as conn
-            INNER JOIN TrashDisposalSystem.villages as vill ON vill.id = conn.connected_village
+        $con = DB::select(DB::raw('SELECT vill.name as destination FROM connections as conn
+            INNER JOIN villages as vill ON vill.id = conn.connected_village
             where conn.route_village = ' . $this->id
         ));
 
@@ -136,12 +136,14 @@ class VillageSchematics
     {
         $this->isVisited = true;
     }
+
     public function setVisitedFalse()
     {
         $this->isVisited = false;
     }
 
-    public function getAvailableRoutes(){
+    public function getAvailableRoutes()
+    {
         return $this->availableRoutes;
     }
 
@@ -161,8 +163,9 @@ class VillageSchematics
         $this->isLookingFor = $isLookingFor;
     }
 
-    public function removeRoute($route){
-        $key = array_search($route,$this->availableRoutes);
+    public function removeRoute($route)
+    {
+        $key = array_search($route, $this->availableRoutes);
         unset($this->availableRoutes[$key]);
     }
 //    public function getShortestPath(): AvailableRoute
