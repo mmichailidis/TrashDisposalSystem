@@ -219,7 +219,7 @@
                         {{--------FORM2--------------}}
 
                         <div class="w3-theme-l4">
-                            <div style="min-width:400px">
+                            {{--<div style="min-width:400px">--}}
 
                                 <div class="w3-container w3-content">
                                     <div class="w3-panel w3-white w3-card w3-display-container">
