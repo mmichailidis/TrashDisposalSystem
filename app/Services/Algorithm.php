@@ -50,7 +50,127 @@ class Algorithm
 
     function executeForSpecificAndAdditive()
     {
+        $specificAreas = [
+            'Koumaria',
+            'Skoutari',
+            'Peponia',
+            'Provatas'
+        ];
 
+        $extraAreas = [
+            'A. Kamila', 'K. Mitrousi'
+        ];
+
+        $this->calculator = new DistanceCalculator();
+        $start = null;
+        $end = null;
+        $maxIterations = 15;
+        $decidedPath = [];
+
+        foreach ($this->villages as $village) {
+            if ($village->getType() == "start") {
+                $start = $village;
+                $start->setVisitedTrue();
+            } else if ($village->getType() == "end") {
+                $end = $village;
+            }
+        }
+
+        $innerVillages = [];
+        foreach ($specificAreas as $area) {
+            $vil = $this->locateVillage($area);
+            $innerVillages[$vil->getName()] = $vil;
+        }
+
+        $exitFlag = true;
+        $current = $start;
+        do {
+            $decisions = [];
+
+            foreach ($innerVillages as $innerVillage) {
+                $results = [];
+                for ($i = 0; $i < $maxIterations; $i++) {
+                    $result = $this->getTargetedPath($current->getName(), $innerVillage->getName());
+                    $distance = 0;
+                    $strPath = "";
+                    $lastVal = "";
+                    foreach ($result as $inner) {
+                        if ($lastVal === $inner->getName())
+                            continue;
+                        $item = $this->locateVillage($inner->getName());
+                        $strPath = $strPath . '{' . $inner->getName() . ',' . $item->getLat() . ',' . $item->getLon() . '}' . ":";
+                        $distance += $inner->getPotential();
+                        $lastVal = $inner->getName();
+                    }
+                    array_push($results, ['path' => $strPath, 'distance' => $distance, 'object' => $innerVillage]);
+                }
+
+                $val = collect($results)->min(function ($v) {
+                    return $v['distance'];
+                });
+
+                array_push($decisions, $this->locateItem($results, $val));
+            }
+            $val = collect($decisions)->min(function ($v) {
+                return $v['distance'];
+            });
+
+            $willGoThisWay = $this->locateItem($decisions, $val);
+            unset($innerVillages[$willGoThisWay["object"]->getName()]);
+            array_push($decidedPath, ["path" => $willGoThisWay['path'], "distance" => $willGoThisWay['distance']]);
+            $current = $willGoThisWay['object'];
+            if (empty($innerVillages)) {
+                $exitFlag = false;
+            }
+        } while ($exitFlag);
+
+        $results = [];
+        for ($i = 0; $i < $maxIterations; $i++) {
+            $result = $this->getTargetedPath($current->getName(), $end->getName());
+            $distance = 0;
+            $strPath = "";
+            $lastVal = "";
+            foreach ($result as $inner) {
+                if ($lastVal === $inner->getName())
+                    continue;
+                $item = $this->locateVillage($inner->getName());
+                $strPath = $strPath . '{' . $inner->getName() . ',' . $item->getLat() . ',' . $item->getLon() . '}' . ":";
+                $distance += $inner->getPotential();
+                $lastVal = $inner->getName();
+            }
+            array_push($results, ['path' => $strPath, 'distance' => $distance, 'object' => $innerVillage]);
+        }
+
+        $val = collect($results)->min(function ($v) {
+            return $v['distance'];
+        });
+
+        array_push($decisions, $this->locateItem($results, $val));
+        $willGoThisWay = $this->locateItem($decisions, $val);
+        array_push($decidedPath, ["path" => $willGoThisWay['path'], "distance" => $willGoThisWay['distance']]);
+
+        $pathToReturn = "";
+        $distanceToReturn = 0;
+        $toMerge = [];
+        foreach ($decidedPath as $path) {
+            $distanceToReturn += $path['distance'];
+            $splitted = explode(":", substr($path['path'], 0, strlen($path['path']) - 1));
+
+            foreach ($splitted as $slice) {
+                if (empty($toMerge)) {
+                    array_push($toMerge, $slice);
+                    continue;
+                }
+                if ($toMerge[count($toMerge) - 1] != $slice) {
+                    array_push($toMerge, $slice);
+                }
+            }
+        }
+        foreach ($toMerge as $part) {
+            $pathToReturn = $pathToReturn . $part . ":";
+        }
+
+        return json_encode(['path' => $pathToReturn, 'distance' => $distanceToReturn]);
     }
 
     function executeForSpecific()
