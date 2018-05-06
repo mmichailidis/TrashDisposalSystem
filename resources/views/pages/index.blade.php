@@ -126,6 +126,10 @@
                             return this._location + this._buck + this._limit;
                         }
                     }
+
+                    function myFunctionB1() {
+
+                    }
                 </script>
 
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0ytnOS1jsLVniRSMiCZN3QyfOqBBcHJs&callback=myMap"></script>
@@ -189,6 +193,7 @@
                         </div>
                     </div>
 
+                    di
                     <div class="pop-up2" hidden>
                         <div class="content">
                             <div class="container">
@@ -249,12 +254,14 @@
 
                                         <div class="row">
                                             </br>
-                                            <input type="button" value="B1"/>
-                                            <input type="button" value="B2" />
-                                            <input type="button" value="B2" />
-                                            <input type="button" value="B2" />
-                                            <input type="button" value="B2" />
-                                            <input type="button" value="B6" />
+                                            <div class="b1">
+                                                <input type="button" value="B1" onclick="myFunctionB1()"/>
+                                            </div>
+                                            <input type="button" value="B2"/>
+                                            <input type="button" value="B2"/>
+                                            <input type="button" value="B2"/>
+                                            <input type="button" value="B2"/>
+                                            <input type="button" value="B6"/>
                                             <input type="button" value="Subscribe" id="demodemo"/>
                                         </div>
                                     </div>
@@ -264,6 +271,10 @@
                     </div>{{-- PopUp2--}}
                 </div>{{-- conatiner--}}
             </div>{{--End Popup Menus--}}
+
+            <div class="div1">
+
+            </div>
         </div>
     </div>
 
@@ -274,6 +285,18 @@
 
         $(".pop-up .close").click(function () {
             $(".pop-up").removeClass("open");
+        });
+
+        $("b1").click(function () {
+            $.ajax({
+                url: "demo_test.txt",
+                type: "POST",
+                data: "",
+                dataType: "application/json",
+                success: function (result) {
+                    $("#div1").html(result);
+                }
+            });
         });
     </script>
 @endsection
