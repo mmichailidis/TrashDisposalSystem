@@ -55,6 +55,12 @@ class Algorithm
                 $end = $village;
             }
         }
+
+        if($this->specificAreasOnly){
+            Log::info("Execute for specific initializing");
+            return $this->executeForSpecific();
+        }
+
         $currentVillage = $start;
         $flag = false;
         $isGoingBack = false;

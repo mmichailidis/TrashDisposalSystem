@@ -32,11 +32,13 @@ class AlgorithmBuilder extends AbstractAlgorithmBuilder
         array_push($this->villages, $village);
     }
 
-    public function lastNodeOneTimeOnlyStatus(bool $flag){
+    public function lastNodeOneTimeOnlyStatus(bool $flag)
+    {
         $this->lastNodeOneTimeStatus = $flag;
     }
 
-    public function specificAreasOnly(boolean $flag){
+    public function specificAreasOnly(bool $flag)
+    {
         $this->specificAreasOnly = $flag;
     }
 
