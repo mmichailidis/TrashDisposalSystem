@@ -2,11 +2,10 @@
 @section('title' , '| Καλώς Ήρθατε')
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
+
                 <h3 style="text-align:center;">Trash Disposal System</h3>
 
-            <div id="googleMap" style="width:100%;height:85%;"></div>
+            <div id="googleMap" style="width:100%;height:100%;"></div>
 
             {{--Pop Up1 Menus--}}
             <div class="col-sm-6">
@@ -87,12 +86,9 @@
                         {{----------------------}}
 
                         {{--------FORM2--------------}}
-
-                        <div class="w3-theme-l4">
+<div class="formbox">
+                        <div class="w3-theme-l0">
                             {{--<div style="min-width:400px">--}}
-
-                            <div class="w3-container w3-content">
-                                <div class="w3-panel w3-white w3-card w3-display-container">
                                     <div class="w3-panel w3-white w3-card w3-display-container">
 
                                         <div class="row">
@@ -129,7 +125,7 @@
                                                         <label>Vehicle:</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="Vehicle" id="Vehicle">
+                                                        <input type="text" name="Vehicle" id="Vehicle" size="4">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -137,14 +133,14 @@
                                                         <label>Capacity:</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="capacity" id="capacity">
+                                                        <input type="text" name="capacity" id="capacity" size="4">
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     </br>
                                                     <div class="asda">
-                                                        <input type="button" value="B1" class="b1"/>
+                                                        <input type="button" value="B1" class="b1" size="4">
                                                     </div>
                                                     <input type="button" value="B2"/>
                                                     <input type="button" value="B2"/>
@@ -156,19 +152,16 @@
                                             </div>{{-- End Form2--}}
                                         </div>
                                     </div>
-
-                                </div>
                             </div>
                         </div>
-                    </div>{{---------End class Container of cpopup2-------------}}
+                    </div>
                 </div>{{---------End class col-------------}}
             </div>{{---------End PopUp2-------------}}
 
             <div class="div1">
 
             </div>
-        </div>{{--End General row--}}
-    </div> {{--Close div of general Container--}}
+
     <script>
         var locations = [
                 @foreach($village as $vi)
