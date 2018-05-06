@@ -40,7 +40,7 @@ class DistanceCalculator
 
     private function setupUrl($lat_route, $lon_route, $des_lat, $des_lon)
     {
-        $url = GOOGLE_DEST_URL . "origins=$lat_route,$lon_route&destinations=$des_lat,$des_lon&key=AIzaSyDFb1m9lj3C-eBveJPpcR5YO1LcAWI53mE";
+        $url = GOOGLE_DEST_URL . "origins=$lat_route,$lon_route&destinations=$des_lat,$des_lon&key=AIzaSyAGrQY2qHDggcQI9Htkw8oDsBwbmchBkig";
 
         $result = $this->curlGoogleDistanceApi($url);
         return $result;

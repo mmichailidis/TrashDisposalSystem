@@ -145,12 +145,17 @@ class GeneralController extends Controller
         return $algorithmExecutor->execute('no data');
     }
 
-    public function questionB2(Request $request)
+    public function questionB2()
     {
-        $villagesArray = $request['Villages'];
+        $parseFile = file_get_contents('files/b1.txt');
+
+        $villagesArray = $parseFile;
+        $villages = array();
+        $decVil = json_decode($villagesArray);
+
         $villages = array();
 
-        foreach ($villagesArray as $village) {
+        foreach ($decVil as $village) {
             $villageSch = VillageSchematics::parse($village);
             array_push($villages, $villageSch);
         }
