@@ -23,12 +23,12 @@ class GeneralController extends Controller
 
     public function index()
     {
-        $village  = Village::all();
+        $village = Village::all();
         $combinations = VillageConnection::all();
         $tmpCombinations = $combinations->toArray();
 
         $villageConn = [];
-        $i=1;
+        $i = 1;
         foreach ($combinations as $combination) {
             $needle = [
                 "id" => $i,
@@ -36,28 +36,28 @@ class GeneralController extends Controller
                 "connected_village" => $combination->connected_village
             ];
             $i++;
-           if(array_search($needle ,$tmpCombinations)){
-               $villageConn[] = $combination;
-           }
+            if (array_search($needle, $tmpCombinations)) {
+                $villageConn[] = $combination;
+            }
 
-           foreach($tmpCombinations as $key => $tmp){
-               if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village){
-                   unset($tmpCombinations[$key]);
-               }
+            foreach ($tmpCombinations as $key => $tmp) {
+                if ($tmp['route_village'] === $combination->connected_village && $tmp['connected_village'] === $combination->route_village) {
+                    unset($tmpCombinations[$key]);
+                }
             }
 
         }
 
         foreach ($villageConn as $key => $value) {
             $route = DB::select(DB::raw(
-                'SELECT latitude, longitude FROM villages WHERE id = '.$value->route_village
+                'SELECT latitude, longitude FROM villages WHERE id = ' . $value->route_village
             ));
 
             $dest = DB::select(DB::raw(
-                'SELECT latitude, longitude FROM villages WHERE id = '.$value->connected_village
+                'SELECT latitude, longitude FROM villages WHERE id = ' . $value->connected_village
             ));
 
-            $villageConn[$key]['route_coord'] =  $route;
+            $villageConn[$key]['route_coord'] = $route;
             $villageConn[$key]['dest_coord'] = $dest;
         }
 
@@ -84,7 +84,7 @@ class GeneralController extends Controller
                     'dest' => $combination->route
                 ];
 
-                if(array_search($revert, $combinationArr) === false)  {
+                if (array_search($revert, $combinationArr) === false) {
                     $combinationArr[] = $combination;
                 }
 
@@ -140,6 +140,27 @@ class GeneralController extends Controller
         });
 
         return $algorithmExecutor->execute('no data');
+    }
+
+    public function questionB2(Request $request)
+    {
+        $villagesArray = $request['Villages'];
+        $villages = array();
+
+        foreach ($villagesArray as $village) {
+            $villageSch = VillageSchematics::parse($village);
+            array_push($villages, $villageSch);
+        }
+
+        $algorithmExecutor = new AlgorithmExecutor(new AlgorithmBuilder());
+
+        collect($villages)->each(function ($vil) use ($algorithmExecutor) {
+            $algorithmExecutor->addVillage($vil);
+        });
+
+        $algorithmExecutor->lastNodeOneTimeOnlyStatus(true);
+
+        return $algorithmExecutor->execute();
     }
 
 }

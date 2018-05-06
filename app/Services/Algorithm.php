@@ -19,6 +19,7 @@ class Algorithm
     private $calculator;
     private $villages = array();
     private $tracks = array();
+    private $lastNodeOneTimeStatus;
 
     function addVillages(array $village)
     {
@@ -30,7 +31,12 @@ class Algorithm
         $this->tracks = $track;
     }
 
-    function execute($data)
+    function lastNodeOneTimeStatus(bool $lastNodeOneTimeStatus)
+    {
+        $this->lastNodeOneTimeStatus = $lastNodeOneTimeStatus;
+    }
+
+    function execute()
     {
         $this->calculator = new DistanceCalculator();
 

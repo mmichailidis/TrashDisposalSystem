@@ -165,41 +165,4 @@ class VillageSchematics
         $key = array_search($route,$this->availableRoutes);
         unset($this->availableRoutes[$key]);
     }
-//    public function getShortestPath(): AvailableRoute
-//    {
-//        $available = array();
-//
-//        dd('Shortest path needs implementation');
-//
-////        foreach ($this->availableRoutes as $route) {
-////            if (!$visitedCollection->contains(function (VillageSchematics $village) use ($route) {
-////                return $village->getName() === $route;
-////            })) {
-////                array_push($available, $route);
-////            };
-////        }
-//
-//        if ($available == null) {
-//            dd('null available', $available, $visitedCollection, $this->availableRoutes);
-//        }
-//
-//        $min = $available[0];
-//
-//        foreach ($available as $route) {
-//            if ($min->getDistance() > $route->getDistance()) {
-//                $min = $route;
-//            }
-//        }
-//
-//        return $min;
-//    }
-//
-//    public function getUnvisitedPaths(Collection $visitedCollection): array
-//    {
-//        return collect($this->availableRoutes)->filter(function (AvailableRoute $route) use ($visitedCollection) {
-//            return !$visitedCollection->contains(function (VillageSchematics $village) use ($visitedCollection, $route) {
-//                return $village->getName() === $route->getTarget();
-//            });
-//        });
-//    }
 }
