@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\DB;
 
 class GeneralController extends Controller
 {
+    private $dataFile;
+
+    /**
+     * GeneralController constructor.
+     */
+    public function __construct()
+    {
+        $this->dataFile = file_get_contents('files/b1.txt');
+    }
+
     public function calculate(Request $request)
     {
         //convert json to object
@@ -127,10 +137,9 @@ class GeneralController extends Controller
 
     public function demo(Request $request)
     {
-        $parseFile = file_get_contents('files/b1.txt');
         $results = [];
         for ($i = 0; $i < 15; $i++) {
-            $villagesArray = $parseFile;
+            $villagesArray = $this->dataFile;
             $villages = array();
             $decVil = json_decode($villagesArray);
             foreach ($decVil as $village) {
@@ -154,10 +163,9 @@ class GeneralController extends Controller
 
     public function questionB2()
     {
-        $parseFile = file_get_contents('files/b1.txt');
         $results = [];
         for ($i = 0; $i < 15; $i++) {
-            $villagesArray = $parseFile;
+            $villagesArray = $this->dataFile;
             $villages = array();
             $decVil = json_decode($villagesArray);
             $villages = array();
@@ -194,8 +202,7 @@ class GeneralController extends Controller
 
     public function questionB3()
     {
-        $parseFile = file_get_contents('files/b1.txt');
-        $villagesArray = $parseFile;
+        $villagesArray = $this->dataFile;
         $villages = array();
         $decVil = json_decode($villagesArray);
         $villages = array();
@@ -216,8 +223,7 @@ class GeneralController extends Controller
 
     public function questionB4()
     {
-        $parseFile = file_get_contents('files/b1.txt');
-        $villagesArray = $parseFile;
+        $villagesArray = $this->dataFile;
         $villages = array();
         $decVil = json_decode($villagesArray);
         $villages = array();
