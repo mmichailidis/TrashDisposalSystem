@@ -135,10 +135,12 @@
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0ytnOS1jsLVniRSMiCZN3QyfOqBBcHJs&callback=myMap"></script>
 
 
-            </div>
-            {{--Pop Up Menus--}}
+            </div>{{--End col of general row--}}
+
+
+            {{--Pop Up1 Menus--}}
             <div class="col-sm-6">
-                <div container>
+                <div class="container">
                     <div class="button">
                         <button><span>Click Me</span></button>
                     </div>
@@ -188,95 +190,99 @@
                                             <input type="button" value="Subscribe" onclick="myFunction2()"/>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>{{---------End form-------------}}
+                            </div>{{---------End Conatiner-------------}}
+                        </div>{{---------End Content-------------}}
+                    </div> {{---------End PopUp1-------------}}
+                </div>{{-- conatiner--}}
+            </div> {{--End Col--}}
+            {{--End Popup Menus--}}
+
+
+
+
+                    {{---------PopUp2-------------}}
+            <div class="pop-up2" hidden>
+            <div class="col-sm-6" id="ion">
+            <div class="w3-container w3-center w3-animate-top">
+                    <div class="dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    {{----------------------}}
+                    <div class="title">
+                        <h1>subscribe</h1>
+                    </div>
+                    {{----------------------}}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="Locations">Locations</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label id="Loc">--</label>
                         </div>
                     </div>
-
-                    di
-                    <div class="pop-up2" hidden>
-                        <div class="content">
-                            <div class="container">
-                                <div class="dots">
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
-                                    <div class="dot"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="buck">Buckets</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label id="Buck">--</label>
+                            {{--<p id="demo666"></p>--}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="demo3">Limits of the road:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label id="Limits">--</label>
+                        </div>
+                    </div>
+                    {{--------FORM2--------------}}
+                    <div class="form2">
+                        <div id="form2">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label>Vehicle:</label>
                                 </div>
-                                {{----------------------}}
-                                <div class="title">
-                                    <h1>subscribe</h1>
-                                </div>
-                                {{----------------------}}
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label id="Locations">Locations</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label id="Loc">--</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label id="buck">Buckets</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label id="Buck">--</label>
-                                        {{--<p id="demo666"></p>--}}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label id="demo3">Limits of the road:</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label id="Limits">--</label>
-                                    </div>
-                                </div>
-                                {{--------FORM2--------------}}
-                                <div class="form2">
-                                    <div id="form2">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>Vehicle:</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" name="Vehicle" id="Vehicle">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>Capacity:</label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" name="capacity" id="capacity">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            </br>
-                                            <div class="b1">
-                                                <input type="button" value="B1" onclick="myFunctionB1()"/>
-                                            </div>
-                                            <input type="button" value="B2"/>
-                                            <input type="button" value="B2"/>
-                                            <input type="button" value="B2"/>
-                                            <input type="button" value="B2"/>
-                                            <input type="button" value="B6"/>
-                                            <input type="button" value="Subscribe" id="demodemo"/>
-                                        </div>
-                                    </div>
+                                <div class="col-md-1">
+                                    <input type="text" name="Vehicle" id="Vehicle">
                                 </div>
                             </div>
-                        </div>{{-- Content--}}
-                    </div>{{-- PopUp2--}}
-                </div>{{-- conatiner--}}
-            </div>{{--End Popup Menus--}}
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label>Capacity:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="capacity" id="capacity">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                </br>
+                                <div class="b1">
+                                    <input type="button" value="B1" onclick="myFunctionB1()"/>
+                                </div>
+                                <input type="button" value="B2"/>
+                                <input type="button" value="B2"/>
+                                <input type="button" value="B2"/>
+                                <input type="button" value="B2"/>
+                                <input type="button" value="B6"/>
+                                <input type="button" value="Subscribe" id="demodemo"/>
+                            </div>
+                        </div>
+                    </div>{{-- End Form2--}}
+            </div>{{---------End class Container of cpopup2-------------}}
+            </div>{{---------End class col-------------}}
+            </div>{{---------End PopUp2-------------}}
 
             <div class="div1">
 
             </div>
-        </div>
-    </div>
+        </div>{{--End General row--}}
+    </div> {{--Close div of general Container--}}
 
     <script>
         $("button").click(function () {
@@ -302,3 +308,4 @@
 @endsection
 
 <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
+<link href="{{ asset('css/popup2.css') }}" rel="stylesheet">
